@@ -1,0 +1,14 @@
+{
+  "name": "nanaschlez",
+  "description": "Nana Schlez artist website",
+  "dependencies": {
+    "axios": "latest",
+    "nuxt-edge": "latest",
+    "prismic-javascript": "^1.5.0"
+  },
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start"
+  }
+}
