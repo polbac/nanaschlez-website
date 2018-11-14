@@ -1,9 +1,7 @@
-
 <template>
   <main>
-      <Navigation />
+      <Navigation v-bind:categories='categories' />
       <div class="container">
-        <p>{{ bio }}</p>
         <router-view/>
       </div>
   </main>
@@ -12,33 +10,29 @@
 <script>
 import { mapState } from 'vuex';
 import Navigation from '../components/Navigation'
-
 export default {
-
   components: {
     Navigation,
   },
-
-  fetch: ({store}) => store.dispatch('fetchBio'),
-
+  
   computed: mapState([
-    'bio'
+    'categories'
   ]),
-
 }
 </script>
 
-<style scoped>
+<style>
+html,body{
+  font-family: 'Source Sans Pro', helvetica, arial, sans-serif;
+}
 .container {
   width: 70%;
   margin: auto;
   text-align: center;
   padding-top: 100px;
+  text-align: center;
 }
 p {
   font-size: 20px;
-}
-a {
-  color: #41B883;
 }
 </style>

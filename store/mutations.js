@@ -1,16 +1,21 @@
 const mutations = {
     
-    setBio(state, bio) {
-      state.bio = bio;
-      console.log('bio', bio);
-    },
+  setBio(state, bio) {
+    state.bio = bio;
+  },
 
-    setCategories(state, categories) {
-      state.categories = categories;
-      console.log('categories', categories);
-    },
+  setCategories(state, categories) {
+    state.categories = categories;
+  },
 
-  }
-  
-  export default mutations
-  
+  showNavigation(state) {
+    state.navigation.showing = true;
+  },
+
+  hideNavigation(state) {
+    state.navigation.showing = false;
+  },
+
+}
+
+export default mutations

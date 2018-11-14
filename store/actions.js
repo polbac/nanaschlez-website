@@ -1,3 +1,4 @@
+
 import { getBio, getCategories } from '../respository/prismic'
 
 const actions = {
