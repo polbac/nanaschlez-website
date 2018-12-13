@@ -11,5 +11,8 @@ export default {
     routes: [
       '/posts/1'
     ]
+  },
+  routes: {
+    middleware: 'navigation'
   }
 }

@@ -25,12 +25,12 @@
 
             <div class='items'>
                 <p>
-                    <router-link :to="{ path: '' }">Home</router-link>
+                    <router-link :to="{ path: '/' }">Home</router-link>
                 </p>
             
                 
                 <p>Obras</p>
-                <a v-bind:href="`obras/${obra.id}`"  v-for='obra in obras'>{{obra.name}}</a>
+                <router-link v-bind:to="{ path: `obras/${obra.id}`}"  v-for='obra in obras'>{{obra.name}}</router-link>
 
                 <p>Ilustraciones</p>
                 <a v-bind:href="`ilustraciones/${ilustracion.id}`" v-for='ilustracion in ilustraciones'>{{ilustracion.name}}</a>

@@ -1,0 +1,39 @@
+<template>
+  <div class='container'>
+      <Navigation v-bind:categories='categories' />
+    <nuxt/>
+  </div>
+</template>
+
+<script>
+import { mapState } from 'vuex';
+import Navigation from '../components/Navigation'
+
+export default {
+  middleware: 'navigation',
+  components: {
+    Navigation,
+  },
+  
+  computed: mapState([
+    'categories'
+  ]),
+}
+</script>
+
+<style>
+html,body{
+  font-family: 'Source Sans Pro', helvetica, arial, sans-serif;
+}
+.container {
+  max-width: 1024px;
+  width: 95%;
+  margin: auto;
+  text-align: left;
+  padding-top: 100px;
+}
+p {
+  font-size: 20px;
+}
+
+</style>
