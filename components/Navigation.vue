@@ -27,20 +27,25 @@
                 <p>
                     <router-link :to="{ path: '' }">Home</router-link>
                 </p>
+            
+                
+                <p>Obras</p>
+                <a v-bind:href="`obras/${obra.id}`"  v-for='obra in obras'>{{obra.name}}</a>
+
+                <p>Ilustraciones</p>
+                <a v-bind:href="`ilustraciones/${ilustracion.id}`" v-for='ilustracion in ilustraciones'>{{ilustracion.name}}</a>
                 
                 <p>
                     <router-link :to="{ path: '/bio' }">Bio</router-link>
                 </p>
                 
-                <p>Obra</p>
-                <a v-for='categorie in categories'>{{categorie}}</a>
+                <p>
+                    <router-link :to="{ path: '/talleres' }">Talleres</router-link>
+                </p>
+
 
                 <p>
                     <router-link :to="{ path: '/exposiciones' }">Exposiciones</router-link>
-                </p>
-
-                <p>
-                    <router-link :to="{ path: '/talleres' }">Talleres</router-link>
                 </p>
 
                 <p>
@@ -58,11 +63,14 @@
 <script>
     import { mapState } from 'vuex';
     import { mapMutations } from 'vuex'
+    
     export default {
         name: 'Navigation',
         props: ['categories'],
         
         computed: mapState([
+            'obras',
+            'ilustraciones',
             'navigation'
         ]),
         methods: {

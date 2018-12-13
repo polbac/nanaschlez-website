@@ -18,6 +18,10 @@ export const getBio = () => api().then(
     prismic => prismic.getByID(config.prismic.documents.bio)
 );
 
-export const getCategories = () => api().then(
-    prismic => prismic.getByID(config.prismic.documents.bio)
+export const getObras = () => api().then(
+    prismic => prismic.query(Prismic.Predicates.at('document.type', 'art'))
+);
+
+export const fetchObraById = (id) => api().then(
+    prismic => prismic.getByID(id)
 );

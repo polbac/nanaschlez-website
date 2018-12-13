@@ -3,20 +3,14 @@ import Vuex from 'vuex'
 import mutations from './mutations'
 import actions from './actions'
 
+import config from '../config';
+
 const createStore = () => {
   return new Vuex.Store({
     state: {
       bio: '',
-      categories: [
-        'Ilustración',
-        'Libros',
-        'Murales',
-        'Soplado Absoluto',
-        'Ajugeros negros',
-        'Chorreado',
-        'Stencil',
-        'Mini Nanas',
-      ],
+      obras: config.prismic.documents.obras,
+      ilustraciones: config.prismic.documents.ilustraciones,
       navigation: {
         showing: false,
       },

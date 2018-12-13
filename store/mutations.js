@@ -8,6 +8,11 @@ const mutations = {
     state.categories = categories;
   },
 
+  setObra(state, detail) {
+    console.log(detail);
+    //state.categories = categories;
+  },
+
   showNavigation(state) {
     state.navigation.showing = true;
   },

@@ -1,6 +1,8 @@
 <template>
-    <article>
-        {{text}}
+    <article class='parraph'>
+          <p v-for="parraph in text">
+              {{parraph.text}}
+        </p>
     </article>
 </template>
 
@@ -12,12 +14,12 @@
                 type: Array,
                 required: true,
             }
-        }
+        },
     }
 </script>
 
 <style>
-    h2 {
+    .parraph {
         font-size: 16px;
     }
 </style>
