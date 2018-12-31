@@ -1,7 +1,7 @@
 <template>
     <div>
-        {{obra}}
         <SectionTitle v-bind:text='obra.data.titulo[0].text' />
+        <ImageComponent v-for="image in obra.data.imagenes" v-bind:source="image.imagen" />
     </div>
   
 </template>
