@@ -1,9 +1,5 @@
 export default {
-  loading: {
-    color: '#4FC08D',
-    failedColor: '#bf5050',
-    duration: 1500
-  },
+  loading: '~/components/Loading.vue',
   head: {
     title: 'Default title'
   },

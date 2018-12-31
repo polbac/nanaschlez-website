@@ -18,8 +18,16 @@ export const getBio = () => api().then(
     prismic => prismic.getByID(config.prismic.documents.bio)
 );
 
+export const getRandomStuff = () => api().then(
+    prismic => prismic.query(Prismic.Predicates.at('document.type', 'random-stuff'))
+);
+
 export const getObras = () => api().then(
     prismic => prismic.query(Prismic.Predicates.at('document.type', 'art'))
+);
+
+export const getIlustraciones = () => api().then(
+    prismic => prismic.query(Prismic.Predicates.at('document.type', 'ilustraciones'))
 );
 
 export const fetchObraById = (id) => api().then(

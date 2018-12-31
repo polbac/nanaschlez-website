@@ -9,8 +9,10 @@ const createStore = () => {
   return new Vuex.Store({
     state: {
       bio: '',
+      home: null,
       obras: config.prismic.documents.obras,
       ilustraciones: config.prismic.documents.ilustraciones,
+      randomStuff: null,
       navigation: {
         showing: false,
       },

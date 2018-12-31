@@ -1,5 +1,8 @@
 <template>
-  
+    <div>
+        {{obra}}
+        <SectionTitle v-bind:text='obra.data.titulo[0].text' />
+    </div>
   
 </template>
 
@@ -19,9 +22,13 @@ export default {
         ImageComponent,
     },
     fetch: ({ store, params }) => store.dispatch({ type: 'fetchObraById', id: params.id }),
-    computed: mapState([
-      'obra'
-    ]),
+    computed: mapState({
+        obra: function ({ obras }) {
+            const id = this.$route.params.id;
+            const obra = obras.find(obra => obra.id === id);
+            return obra.detail;
+        }
+    }),
     
 }
 </script>

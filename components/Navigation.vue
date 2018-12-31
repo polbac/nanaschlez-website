@@ -30,10 +30,10 @@
             
                 
                 <p>Obras</p>
-                <router-link v-bind:to="{ path: `obras/${obra.id}`}"  v-for='obra in obras'>{{obra.name}}</router-link>
+                <router-link v-bind:to="{ path: `/obras/${obra.id}`}"  v-for='obra in obras'>{{obra.name}}</router-link>
 
                 <p>Ilustraciones</p>
-                <a v-bind:href="`ilustraciones/${ilustracion.id}`" v-for='ilustracion in ilustraciones'>{{ilustracion.name}}</a>
+                <a v-bind:href="`/ilustraciones/${ilustracion.id}`" v-for='ilustracion in ilustraciones'>{{ilustracion.name}}</a>
                 
                 <p>
                     <router-link :to="{ path: '/bio' }">Bio</router-link>
@@ -120,9 +120,12 @@
         display: inline-block;
     }
     #item-menu {
+        cursor: pointer;
+        color: #ff0;
+        text-shadow: 1px 1px 0 black;
         position: fixed;
-        bottom: 20px;
-        left: 50%;
-        margin-left: -20px;
+        top: 20px;
+        right: 20px;
+        z-index: 10;
     }
 </style>
