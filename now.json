@@ -1,4 +1,5 @@
 {
     "name": "nanaschlez",
-    "alias": ["nanaschlez-website.now.sh"]
+    "alias": ["nanaschlez-website.now.sh"],
+    "type": "npm"
   }
