@@ -15,7 +15,7 @@
 
 <script>
 import config from '../../config';
-import { SectionTitle, Parraph, ImageComponent } from '../../components'
+import { SectionTitle, ImageComponent } from '../../components'
 import { mapState } from 'vuex';
 
 export default {
@@ -25,7 +25,6 @@ export default {
     layout: 'default',
     components: {
         SectionTitle,
-        Parraph,
         ImageComponent,
     },
     fetch: ({ store, params }) => store.dispatch({ type: 'fetchIlustracionById', id: params.id }),
