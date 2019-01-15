@@ -1,5 +1,5 @@
 
-import { getObras, getBio, getIlustraciones, getRandomStuff, fetchObraById } from '../respository/prismic'
+import { getObras, getBio, getIlustraciones, getRandomStuff, fetchObraById, fetchIlustracionById } from '../respository/prismic'
 
 const actions = {
 
@@ -12,7 +12,6 @@ const actions = {
 
         const randomStuff = await getRandomStuff();
         randomStuff.results.forEach(randomStuff => commit('setRandomStuff', randomStuff));
-
         commit('setHome', { 
             obras: obras.results, 
             ilustraciones: ilustraciones.results,
@@ -29,9 +28,15 @@ const actions = {
         const categories = await getCategories();
         commit('setCategories', categories)
     },
+    
     async fetchObraById({ commit }, { id }) {
         const detail = await fetchObraById(id);
         commit('setObra', detail)
+    },
+
+    async fetchIlustracionById({ commit }, { id }) {
+        const detail = await fetchIlustracionById(id);
+        commit('setIlustracion', detail)
     }
 };
 

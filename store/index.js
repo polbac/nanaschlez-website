@@ -5,21 +5,23 @@ import actions from './actions'
 
 import config from '../config';
 
-const createStore = () => {
-  return new Vuex.Store({
-    state: {
-      bio: '',
-      home: null,
-      obras: config.prismic.documents.obras,
-      ilustraciones: config.prismic.documents.ilustraciones,
-      randomStuff: null,
-      navigation: {
-        showing: false,
-      },
+export const initialStore = {
+  state: {
+    bio: '',
+    home: null,
+    obras: config.prismic.documents.obras,
+    ilustraciones: config.prismic.documents.ilustraciones,
+    randomStuff: null,
+    navigation: {
+      showing: false,
     },
-    mutations,
-    actions,
-  })
+  },
+  mutations,
+  actions,
+};
+
+const createStore = () => {
+  return new Vuex.Store(initialStore)
 }
 
 export default createStore

@@ -33,3 +33,7 @@ export const getIlustraciones = () => api().then(
 export const fetchObraById = (id) => api().then(
     prismic => prismic.getByID(id)
 );
+
+export const fetchIlustracionById = (id) => api().then(
+    prismic => prismic.getByID(id)
+);

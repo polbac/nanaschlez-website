@@ -89,7 +89,6 @@ export default {
       const { container } = this.$refs;
       this.contentHeight = container.offsetHeight / 3;
       this.viewportHeight = viewportHeight();
-      console.log(container);
     }
 
   },

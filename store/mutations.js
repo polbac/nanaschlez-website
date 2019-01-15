@@ -1,10 +1,10 @@
 
 import { randomItem, shuffleArray } from '../utils';
+import { initialStore } from './index';
 
 const mutations = {
     
   setHome(state, { obras, ilustraciones, randomStuff }) {
-    console.log(obras)
     state.home = shuffleArray([
       ...obras.map(obra => ({
         id: obra.id,
@@ -18,7 +18,7 @@ const mutations = {
         type: 'ilustraciones',
         title: obra.data.titulo[0].text,
         image: randomItem(obra.data.series).imagen,
-        link: `ilustracion/${obra.id}`,
+        link: `ilustraciones/${obra.id}`,
       })),
       ...randomStuff.map(random => ({
         id: random.id,
@@ -60,6 +60,10 @@ const mutations = {
   hideNavigation(state) {
     state.navigation.showing = false;
   },
+
+  resetStore(state) {
+    state = initialStore;
+  }
 
 }
 

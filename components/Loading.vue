@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="loading-page" v-if="loading">
-    <p>Loading...</p>
+    <img src="~/assets/loading.gif"></video>
   </div>
 </template>
 
@@ -27,10 +27,13 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.8);
   text-align: center;
   padding-top: 200px;
   font-size: 30px;
   font-family: sans-serif;
+  z-index: 99999;
+}
+img{
+  width: 300px;
 }
 </style>
