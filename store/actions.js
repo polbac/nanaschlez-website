@@ -4,6 +4,7 @@ import { getObras, getBio, getIlustraciones, getRandomStuff, fetchObraById, fetc
 const actions = {
 
     async fetchHome({commit}) {
+        
         const obras = await getObras();
         obras.results.forEach(obra => commit('setObra', obra));
 
@@ -12,6 +13,9 @@ const actions = {
 
         const randomStuff = await getRandomStuff();
         randomStuff.results.forEach(randomStuff => commit('setRandomStuff', randomStuff));
+
+        console.log('randomStuff', randomStuff);
+        
         commit('setHome', { 
             obras: obras.results, 
             ilustraciones: ilustraciones.results,
@@ -37,6 +41,10 @@ const actions = {
     async fetchIlustracionById({ commit }, { id }) {
         const detail = await fetchIlustracionById(id);
         commit('setIlustracion', detail)
+    },
+
+    resetStore({ commit }) {
+        commit('resetStore')
     }
 };
 

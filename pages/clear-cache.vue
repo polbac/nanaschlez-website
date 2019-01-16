@@ -7,7 +7,10 @@
 <script>
 export default {
   
-  fetch: ({ store }) => store.commit('resetStore'),
+  fetch: ({ store }) => {
+    console.log('resetStore');
+    store.dispatch({ type: 'resetStore' });
+  }
 
 }
 </script>

@@ -2,13 +2,11 @@ import Prismic from 'prismic-javascript';
 import config from '../config';
 
 const api = () => new Promise(async (resolve, reject) => {
-    if (global.prismic === undefined) {
-        try {
-            global.prismic = await Prismic.api(config.prismic.api);
-        } catch(error) {
-            console.log(error);
-            reject('Cant connect Primic');
-        }
+    try {
+        global.prismic = await Prismic.api(config.prismic.api, { apiDataTTL: 0 });
+    } catch(error) {
+        console.log(error);
+        reject('Cant connect Primic');
     }
 
     resolve(global.prismic);

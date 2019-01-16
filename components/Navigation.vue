@@ -1,5 +1,11 @@
 <template>
     <div>
+        <h1>
+            <div id='logo'>
+                <router-link :to="{ path: '/' }"><img src="~/assets/logo.png" alt=""></router-link>
+            </div>
+        </h1>
+
         <nav v-bind:class="{ active: navigation.showing }">
             <div class='close' v-on:click="hide">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -21,7 +27,7 @@
                 </svg>
             </div>
 
-            <h1>NANA SCHLEZ</h1>
+            
 
             <div class='items'>
                 <p>
@@ -55,8 +61,10 @@
 
         </nav>
         <div id='item-menu' v-on:click="show">
-            Menú
+            <img src="~/assets/menu.png" alt="">
         </div>
+
+        
     </div>
 </template>
 
@@ -124,8 +132,24 @@
         color: #ff0;
         text-shadow: 1px 1px 0 black;
         position: fixed;
-        top: 20px;
-        right: 20px;
+        top: 15px;
+        right: 25px;
         z-index: 10;
+        width: 30px;
+        text-align: center;
+    }
+    #item-menu img {
+        width: 100%;
+    }
+
+    #logo{
+        position: fixed;
+        top: 15px;
+        left: 20px;
+        z-index: 999;
+    }
+
+    #logo img{
+        width: 45px;
     }
 </style>

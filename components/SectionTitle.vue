@@ -16,7 +16,7 @@
 
 <style>
     h2 {
-        font-size: 20px;
+        font-size: 46px;
         margin-bottom: 50px;
     }
 </style>
