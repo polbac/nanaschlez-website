@@ -13,11 +13,12 @@ import WorkshopsMarquee from '../components/WorkshopsMarquee'
 
 export default {
   middleware: 'navigation',
+  
   components: {
     Navigation,
     WorkshopsMarquee,
   },
-  
+
   computed: mapState([
     'categories'
   ]),

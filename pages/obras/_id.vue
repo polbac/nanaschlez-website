@@ -38,7 +38,7 @@ export default {
         obra: function ({ obras }) {
             const id = this.$route.params.id;
             const obra = obras.find(obra => obra.id === id);
-            return obra.detail;
+            return obra;
         }
     }),
     

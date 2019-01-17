@@ -37,8 +37,8 @@ export default {
     computed: mapState({
         obra: function ({ ilustraciones }) {
             const id = this.$route.params.id;
-            const obra = ilustraciones.find(obra => obra.id === id);
-            return obra.detail;
+            const ilustracion = ilustraciones.find(obra => obra.id === id);
+            return ilustracion;
         }
     }),
     

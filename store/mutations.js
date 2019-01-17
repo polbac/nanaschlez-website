@@ -45,12 +45,25 @@ const mutations = {
 
   setObra(state, detail) {
     const index = state.obras.findIndex(({ id }) => id === detail.id );
-    state.obras[index].detail = detail;
+    
+    if (index !== -1) {
+      state.obras[index].detail = detail;
+      return;
+    }
+
+    state.obras.push(detail);
+    
   },
 
   setIlustracion(state, detail) {
     const index = state.ilustraciones.findIndex(({ id }) => id === detail.id );
-    state.ilustraciones[index].detail = detail;
+
+    if (index !== -1) {
+      state.ilustraciones[index].detail = detail;
+      return;
+    }
+
+    state.ilustraciones.push(detail);
   },
 
   showNavigation(state) {
