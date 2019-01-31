@@ -10,5 +10,8 @@ export default {
   },
   routes: {
     middleware: 'navigation'
-  }
+  },
+  plugins: [
+    { src: '~/plugins/masonry', ssr: false }
+   ]
 }

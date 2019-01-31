@@ -35,3 +35,7 @@ export const fetchObraById = (id) => api().then(
 export const fetchIlustracionById = (id) => api().then(
     prismic => prismic.getByID(id)
 );
+
+export const fetchWorkshop = () => api().then(
+    prismic => prismic.getByID(config.prismic.documents.workshop)
+);

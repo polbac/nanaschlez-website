@@ -29,7 +29,6 @@ const mutations = {
       })),
     ]);
     state.home = [ ...state.home.filter(item => item !== null) ];
-    console.log(state.home.length);
   },
 
   setBio(state, bio) {
@@ -54,6 +53,11 @@ const mutations = {
 
     state.obras.push(detail);
     
+  },
+
+  setWorkshop(state, workshop) {
+    console.log(workshop);
+    state.workshop = workshop;
   },
 
   setIlustracion(state, detail) {

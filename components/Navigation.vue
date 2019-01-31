@@ -56,7 +56,7 @@
                     </p>
                     
                     <p>
-                        <router-link class='item-big' :to="{ path: '/talleres' }">Talleres</router-link>
+                        <router-link class='item-big' :to="{ path: '/workshop' }">Talleres</router-link>
                     </p>
 
 

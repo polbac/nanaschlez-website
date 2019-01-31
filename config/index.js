@@ -8,6 +8,7 @@ export default {
         api: 'https://nanaschelz.cdn.prismic.io/api/v2',
         documents: {
             bio: 'WyHjDB0AACEAUHji',
+            workshop: 'XCTjDBAAAHpkN3m9',
             contact: '',
             press: '',
             obras: [],
