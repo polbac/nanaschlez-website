@@ -6,20 +6,20 @@ const mutations = {
     
   setHome(state, { obras, ilustraciones, randomStuff }) {
     state.home = shuffleArray([
-      ...obras.map(obra => ({
+      ...obras.map(obra => obra.data.imagenes.length ? {
         id: obra.id,
         type: 'obras',
         title: obra.data.titulo[0].text,
         image: randomItem(obra.data.imagenes).imagen,
         link: `obras/${obra.id}`,
-      })),
-      ...ilustraciones.map(obra => ({
-        id: obra.id,
-        type: 'ilustraciones',
-        title: obra.data.titulo[0].text,
-        image: randomItem(obra.data.series).imagen,
-        link: `ilustraciones/${obra.id}`,
-      })),
+      } : null) ,
+      ...ilustraciones.map(obra => obra.data.series.length ? {
+          id: obra.id,
+          type: 'ilustraciones',
+          title: obra.data.titulo[0].text,
+          image: randomItem(obra.data.series).imagen,
+          link: `ilustraciones/${obra.id}`,
+      }: null),
       ...randomStuff.map(random => ({
         id: random.id,
         type: 'random-stuff',
@@ -28,7 +28,8 @@ const mutations = {
         link: random.data.link.url
       })),
     ]);
-    state.home = [ ...state.home ];
+    state.home = [ ...state.home.filter(item => item !== null) ];
+    console.log(state.home.length);
   },
 
   setBio(state, bio) {

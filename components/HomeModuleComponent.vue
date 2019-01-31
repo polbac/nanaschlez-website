@@ -83,10 +83,10 @@
 
 <style>
 .image-container:hover{
-    box-shadow: 5px 5px 10px yellow;
+    
 }
 .home-module-component{
-    width: 24%;
+    width: 32%;
     height: 35vh;
     display: inline-block;
     position: relative;

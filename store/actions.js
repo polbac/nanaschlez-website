@@ -16,6 +16,7 @@ const actions = {
         ilustraciones.results.forEach(ilustracion => commit('setIlustracion', ilustracion));
 
         const randomStuff = await getRandomStuff();
+        console.log(randomStuff)
         randomStuff.results.forEach(randomStuff => commit('setRandomStuff', randomStuff));
 
         commit('setHome', { 
