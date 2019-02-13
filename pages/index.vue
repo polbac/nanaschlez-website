@@ -32,7 +32,9 @@ export default {
     }
   },
   
-  fetch: ({ store }) => store.dispatch({ type: 'fetchHome' }),
+  fetch: ({ store }) => {
+    store.dispatch({ type: 'fetchHome' })
+  },
   
   computed: mapState(['home']),
   
@@ -106,7 +108,10 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    padding-right: 60px;
     box-sizing: border-box;
+  }
+
+  @media (min-width: 640px){
+    padding-right: 60px;
   }
 </style>

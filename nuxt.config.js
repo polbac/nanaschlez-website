@@ -1,11 +1,13 @@
+import config from './config';
+
 export default {
   loading: '~/components/Loading.vue',
   head: {
-    title: 'Default title'
+    title: config.title
   },
   generate: {
     routes: [
-      '/posts/1'
+
     ]
   },
   routes: {

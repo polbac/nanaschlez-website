@@ -86,25 +86,27 @@
     
 }
 .home-module-component{
-    width: 32%;
     height: 35vh;
+    width: 100%;   
     display: inline-block;
     position: relative;
     text-align: center;
     vertical-align: top;
 }
 
-@media (max-width: 720px){
+@media (min-width: 640px){
     .home-module-component{
-     width: 32%;   
+        width: 48%;   
     }
 }
 
-@media (max-width: 460px){
+@media (min-width: 720px){
     .home-module-component{
-     width: 100%;   
+        width: 32%;   
     }
 }
+
+
 
 .home-module-component img{
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
