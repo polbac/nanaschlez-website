@@ -1,11 +1,15 @@
 <template>
-        <div id='workshops-marquee' v-if="workshop">
-            <div
-                v-bind:style="{ top: offset + 'px' }" 
-                class='workshops-marquee-content' 
-                v-html='text'>
+        <router-link class='item-big' :to="{ path: '/workshop' }">            
+            <div id='workshops-marquee' v-if="workshop">
+                
+                    <div
+                        v-bind:style="{ top: offset + 'px' }" 
+                        class='workshops-marquee-content' 
+                        v-html='text'>
+                    </div>
+                
             </div>
-        </div>
+        </router-link>
     </div>
 </template>
 
