@@ -48,6 +48,7 @@ export default {
   },
   
   mounted() {
+    this.$store.dispatch({ type: 'fetchHome' })
     if (window.addEventListener) {
       window.addEventListener('resize', this.setContentAndViewportProperties);
       window.addEventListener('mousewheel', this.handleWheel);
