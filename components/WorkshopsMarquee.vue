@@ -1,29 +1,49 @@
 <template>
-    <div id='workshops-marquee' >
-        <div
-            v-bind:style="{ top: offset + 'px' }" 
-            class='workshops-marquee-content' 
-            v-html='text'>
-        </div>
+        <router-link class='item-big' :to="{ path: '/workshop' }">            
+            <div id='workshops-marquee' v-if="workshop">
+                
+                    <div
+                        v-bind:style="{ top: offset + 'px' }" 
+                        class='workshops-marquee-content' 
+                        v-html='text'>
+                    </div>
+                
+            </div>
+        </router-link>
     </div>
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     export default {
-        name: 'WotshopsMarquee',
-        data: () => ({
-                text: splitCharacters('Workshops todos los martes y miercoles a las 19hs - Preguntar por clases personalizadas. MÁS INFO HACÉ CLICK AQUÍ!'),
-                offset: 0, 
-                $container: null,
-                $text: null,
-        }),
-        mounted(){
-            if (document){
+        name: 'WorshopsMarquee',
+        data: () => {
+                return {
+                    mounted: false,
+                    offset: 0, 
+                    $container: null,
+                    $text: null,
+                };
+        },
+        
+        computed: mapState(['workshop']),
+
+        updated(){
+            if (this.workshop && document && !this.mounted) {
+                this.mounted = true;
+                this.text = splitCharacters(this.workshop.data.texto_en_marquesina[0].text);
                 this.$container = document.querySelector('#workshops-marquee');
                 this.$text = document.querySelector('#workshops-marquee .workshops-marquee-content');
-                this.offset = this.$container.offsetHeight;
                 this.interval = setInterval(this.updateMarquee, 15);  
             }
+        },
+
+        mounted(){
+            this.$store.dispatch('fetchWorkshop')
+            
+            /* if (document){
+                
+            } */
         },
         destroyed: () => {
             
@@ -113,6 +133,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffff00', e
 
     #workshops-marquee span.space{
         margin-bottom: 20px;
+    }
+
+    @media(max-width: 640px){
+        #workshops-marquee{
+            display: none;
+        }
     }
 </style>
 
