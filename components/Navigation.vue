@@ -8,7 +8,7 @@
 
         <nav v-bind:class="{ active: navigation.showing }">
 
-            
+            <video autoplay loop src="~/assets/video-nav.mp4"></video>
 
             <div class='close' v-on:click="hide">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -70,7 +70,7 @@
                 </div>
             </div>
             
-            <video autoplay loop src="~/assets/video-nav.mp4"></video>
+            
         </nav>
         <div id='item-menu' v-on:click="show">
             <img src="~/assets/menu.png" alt="">
@@ -202,4 +202,17 @@
         margin: auto;
     }
 
+    @media(max-width:640px){
+        
+        nav .items .block{
+            width: 80%;
+            margin-top: 0;
+        }
+        nav{
+            overflow: auto;
+        }
+        nav video{
+            position: static;
+        }
+    }
 </style>

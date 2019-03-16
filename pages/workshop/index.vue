@@ -3,7 +3,7 @@
     <SectionTitle v-bind:text='workshop.data.titulo[0].text' />
     <Parraph v-bind:text='workshop.data.descripcion' />
 
-    <div v-masonry transition-duration="3s" item-selector=".item" class="masonry-container">
+    <div v-masonry transition-duration="0.3s" item-selector=".item" class="masonry-container">
       <div v-masonry-tile class="item" :key="index" v-for="(item, index) in workshop.data.galeria">
         <img class='image-gallery' v-bind:src='item.image.url' width='100%' />
       </div>
@@ -23,16 +23,20 @@ export default {
     head: {
         title: `${config.title} - talleres`
     },
+    
     layout: 'default',
+    
     components: {
         SectionTitle,
         Parraph,
         ImageComponent,
     },
+    
     fetch: ({store}) => store.dispatch('fetchWorkshop'),
     computed: mapState([
       'workshop'
     ]),
+
     mounted () {
       if (typeof this.$redrawVueMasonry === 'function') {
         this.$redrawVueMasonry()
@@ -46,10 +50,19 @@ export default {
 
 .item {
   width: 30%;
-  margin: 10px;
+  padding:10px;
+  box-sizing: border-box;
 }
 
 .masonry-container {
   margin-top: 50px;
+}
+
+@media (max-width: 640px) {
+  .item {
+    width: 100%;
+    padding: 0;
+    padding-bottom:10px;
+  } 
 }
 </style>

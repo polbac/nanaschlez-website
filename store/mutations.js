@@ -56,7 +56,6 @@ const mutations = {
   },
 
   setWorkshop(state, workshop) {
-    console.log(workshop);
     state.workshop = workshop;
   },
 

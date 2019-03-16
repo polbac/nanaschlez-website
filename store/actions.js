@@ -7,7 +7,11 @@ const actions = {
         dispatch({ type: 'fetchHome' });
     },
 
-    async fetchHome({commit}) {
+    async fetchHome({commit, state}) {
+        
+        if(state.home !== null){
+            return null;
+        }
 
         const obras = await getObras();
         obras.results.forEach(obra => commit('setObra', obra));

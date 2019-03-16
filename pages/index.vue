@@ -1,13 +1,14 @@
 <template>
+
   <div class='home-container' ref='container' v-bind:style="{top: `${scrollPosition}px`}">
+
     <div>
       <HomeModuleComponent v-for="module in home" v-bind:data="module" />
     </div>
-    <div>
-      <HomeModuleComponent v-for="module in home" v-bind:data="module" />
-    </div>
-    <div>
-      <HomeModuleComponent v-for="module in home" v-bind:data="module" />
+    
+    <div class='for-infinite'>
+        <HomeModuleComponent v-for="module in home" v-bind:data="module" />
+        <HomeModuleComponent v-for="module in home" v-bind:data="module" />
     </div>
   </div>
 </template>
@@ -49,16 +50,31 @@ export default {
   
   mounted() {
     this.$store.dispatch({ type: 'fetchHome' })
-    if (window.addEventListener) {
-      window.addEventListener('resize', this.setContentAndViewportProperties);
-      window.addEventListener('mousewheel', this.handleWheel);
-      window.addEventListener('DOMMouseScroll', this.handleWheel);
-    } else {
-      window.attachEvent("onmousewheel", this.handleWheel);
+    
+    if (this.shouldCreateInfiniteScroll()){ 
+      if (window.addEventListener) {
+        window.addEventListener('resize', this.setContentAndViewportProperties);
+        window.addEventListener('mousewheel', this.handleWheel);
+        window.addEventListener('DOMMouseScroll', this.handleWheel);
+      } else {
+        window.attachEvent("onmousewheel", this.handleWheel);
+      }
+      this.setContentAndViewportProperties();
     }
-    this.setContentAndViewportProperties();
   },
   methods:{
+
+    shouldCreateInfiniteScroll(){
+      
+      if (process.client) {
+        const w = window,
+            d = document,
+            e = d.documentElement,
+            g = d.getElementsByTagName('body')[0],
+            width = w.innerWidth || e.clientWidth || g.clientWidth;
+        return width >= 640;
+      }
+    },
 
     handleScroll() {
       const scrollPosition = scrollPosition();
@@ -66,6 +82,7 @@ export default {
 
     handleWheel(event) {
       const delta = event.deltaY;
+      
       if (delta === 0) {
         return;
       }
@@ -95,7 +112,7 @@ export default {
     }
 
   },
-  beforeDestroy(){
+  beforeDestroy() {
     window.removeEventListener('resize', this.setContentAndViewportProperties);
 
   },
@@ -114,5 +131,14 @@ export default {
 
   @media (min-width: 640px){
     padding-right: 60px;
+  }
+
+  @media (max-width: 640px){
+    .for-infinite{
+      display: none;
+    }
+    .home-container{
+      position: static;
+    }
   }
 </style>
