@@ -9,6 +9,8 @@
       </div>
     </div>
 
+    
+
   </div>
   
 </template>
@@ -20,12 +22,13 @@ import { mapState } from 'vuex';
 
 
 export default {
+
     head: {
         title: `${config.title} - talleres`
     },
     
     layout: 'default',
-    
+
     components: {
         SectionTitle,
         Parraph,

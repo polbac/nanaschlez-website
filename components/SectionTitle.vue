@@ -16,8 +16,10 @@
 
 <style>
     h2 {
-        font-size: 46px;
-        margin-bottom: 50px;
+        font-size: 26px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
     }
 </style>
 

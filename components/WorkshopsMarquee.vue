@@ -75,7 +75,7 @@
         position: fixed;
         right: 20px;
         top: 60px;
-        bottom: 30px;
+        bottom: 20px;
         width: 40px;
         text-align: center;
         font-weight: bold;
@@ -84,6 +84,10 @@
         overflow: hidden;
         cursor: pointer;
         z-index: 10;
+    }
+
+    #workshops-marquee a {
+        color: black;
     }
 
     #workshops-marquee::before{

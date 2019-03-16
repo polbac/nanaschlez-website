@@ -27,7 +27,7 @@ export default {
 
 <style>
   html,body{
-    font-family: 'Source Sans Pro', helvetica, arial, sans-serif;
+    font-family: 'Open Sans Condensed', helvetica, arial, sans-serif;
   }
   .container {
     max-width: 1024px;
