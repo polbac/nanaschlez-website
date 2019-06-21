@@ -1,5 +1,9 @@
 {
+    "version": 1,
     "name": "nanaschlez",
     "alias": ["nanas-chlez.now.sh"],
-    "type": "npm"
+    "type": "npm",
+    "builds": [
+      { "src": "package.json", "use": "@now/static-build" }
+    ]
   }
