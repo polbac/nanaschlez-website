@@ -10,8 +10,6 @@
             <div class='pic'>
                 <ImageComponent  v-bind:source="image.imagen" />
                 <div class='foot-title' v-if="image.titulo1[0]">{{image.titulo1[0].text}}</div>
-                <div class='foot-desc' v-if="image.descripcion1[0]">{{image.descripcion1[0].text}}</div>
-                <div class='foot-tec' v-if="image.tecnica[0]">{{image.tecnica[0].text}}</div>
 
             </div>
         </div>
