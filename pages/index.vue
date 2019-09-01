@@ -33,8 +33,8 @@ export default {
     }
   },
   
-  fetch: ({ store }) => {
-    store.dispatch({ type: 'fetchHome' })
+  async fetch({ store }) {
+    await store.dispatch({ type: 'fetchHome' })
   },
   
   computed: mapState(['home']),

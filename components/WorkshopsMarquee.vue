@@ -71,7 +71,7 @@
 
 <style>
     #workshops-marquee{
-        background: #ff0;
+        border: 2px solid black;
         position: fixed;
         right: 20px;
         top: 60px;
@@ -123,9 +123,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffff00', e
         z-index: 2;
     }
 
-    #workshops-marquee:hover{
-        box-shadow: 5px 5px 0 black;
-    }
+    
 
     #workshops-marquee .workshops-marquee-content{
         position: absolute;

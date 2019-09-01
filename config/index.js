@@ -13,6 +13,7 @@ export default {
             press: '',
             obras: [],
             ilustraciones: [],
+            murales: [],
         }
     }
 }

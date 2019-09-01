@@ -28,11 +28,20 @@ export const getIlustraciones = () => api().then(
     prismic => prismic.query(Prismic.Predicates.at('document.type', 'ilustraciones'))
 );
 
+
+export const getMurales = () => api().then(
+    prismic => prismic.query(Prismic.Predicates.at('document.type', 'mural'))
+);
+
 export const fetchObraById = (id) => api().then(
     prismic => prismic.getByID(id)
 );
 
 export const fetchIlustracionById = (id) => api().then(
+    prismic => prismic.getByID(id)
+);
+
+export const fetchMuralById = (id) => api().then(
     prismic => prismic.getByID(id)
 );
 

@@ -13,11 +13,6 @@
                 <div class='foot-desc' v-if="image.descripcion1[0]">{{image.descripcion1[0].text}}</div>
                 <div class='foot-tec' v-if="image.tecnica[0]">{{image.tecnica[0].text}}</div>
 
-                <div class='sell' v-if="obra.data.se_vende=='Si'">
-                    <div clas="tit"><b>¿LO QUERÉS EN POSTER?</b></div>
-                    Sale $ {{obra.data.precio}}
-                    <button class='buy-poster'>COMPRAR</button>
-                </div>
             </div>
         </div>
 
@@ -53,13 +48,13 @@ export default {
         Parraph,
     },
     async fetch({ store, params }){
-        await store.dispatch({ type: 'fetchIlustracionById', id: params.id })
+        await store.dispatch({ type: 'fetchMuralById', id: params.id })
     },
     computed: mapState({
-        obra: function ({ ilustraciones }) {
+        obra: function ({ murales }) {
             const id = this.$route.params.id;
-            const ilustracion = ilustraciones.find(obra => obra.id === id);
-            return ilustracion;
+            const mural = murales.find(obra => obra.id === id);
+            return mural;
         }
     }),
     

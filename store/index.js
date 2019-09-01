@@ -11,6 +11,7 @@ export const initialStore = {
     home: null,
     obras: config.prismic.documents.obras,
     ilustraciones: config.prismic.documents.ilustraciones,
+    murales: config.prismic.documents.murales,
     workshop: null,
     randomStuff: null,
     navigation: {

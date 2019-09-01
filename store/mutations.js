@@ -4,7 +4,7 @@ import { initialStore } from './index';
 
 const mutations = {
     
-  setHome(state, { obras, ilustraciones, randomStuff }) {
+  setHome(state, { obras, ilustraciones, randomStuff, murales }) {
     state.home = shuffleArray([
       ...obras.map(obra => obra.data.imagenes.length ? {
         id: obra.id,
@@ -27,6 +27,13 @@ const mutations = {
         image: random.data.imagen,
         link: random.data.link.url
       })),
+      ...murales.map(mural => mural.data.series.length ? {
+        id: mural.id,
+        type: 'mural',
+        title: mural.data.titulo[0].text,
+        image: randomItem(mural.data.series).imagen,
+        link: `murales/${mural.id}`,
+      }: null),
     ]);
     state.home = [ ...state.home.filter(item => item !== null) ];
   },
@@ -68,6 +75,17 @@ const mutations = {
     }
 
     state.ilustraciones.push(detail);
+  },
+
+  setMural(state, detail) {
+    const index = state.murales.findIndex(({ id }) => id === detail.id );
+
+    if (index !== -1) {
+      state.murales[index].detail = detail;
+      return;
+    }
+
+    state.murales.push(detail);
   },
 
   showNavigation(state) {

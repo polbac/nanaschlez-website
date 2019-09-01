@@ -1,5 +1,5 @@
 
-import { fetchWorkshop, getObras, getBio, getIlustraciones, getRandomStuff, fetchObraById, fetchIlustracionById } from '../respository/prismic'
+import { fetchWorkshop, getObras, getBio, getIlustraciones, getMurales, getRandomStuff, fetchObraById, fetchIlustracionById, fetchMuralById } from '../respository/prismic'
 
 const actions = {
 
@@ -19,12 +19,16 @@ const actions = {
         const ilustraciones = await getIlustraciones();
         ilustraciones.results.forEach(ilustracion => commit('setIlustracion', ilustracion));
 
+        const murales = await getMurales();
+        murales.results.forEach(mural => commit('setMural', mural));
+
         const randomStuff = await getRandomStuff();
         randomStuff.results.forEach(randomStuff => commit('setRandomStuff', randomStuff));
 
         commit('setHome', { 
             obras: obras.results, 
             ilustraciones: ilustraciones.results,
+            murales: murales.results,
             randomStuff: randomStuff.results,
         });
     },
@@ -47,6 +51,11 @@ const actions = {
     async fetchIlustracionById({ commit }, { id }) {
         const detail = await fetchIlustracionById(id);
         commit('setIlustracion', detail)
+    },
+
+    async fetchMuralById({ commit }, { id }) {
+        const detail = await fetchMuralById(id);
+        commit('setMural', detail)
     },
 
     async fetchWorkshop({ commit }) {       

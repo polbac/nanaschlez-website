@@ -45,10 +45,15 @@
                 </div>
 
                 <div class='block'>
-                    <p>ILUSTRACIONES</p>
+                    <p  class='item-big'>ILUSTRACIONES</p>
                     <a v-bind:href="`/ilustraciones/${ilustracion.id}`" v-for='ilustracion in ilustraciones'>{{ilustracion.data.titulo[0].text}}</a>
                 </div>
                 
+                <div class='block'>
+                    <p  class='item-big'>MURALES</p>
+                    <a v-bind:href="`/murales/${mural.id}`" v-for='mural in murales'>{{mural.data.titulo[0].text}}</a>
+                </div>
+
                 <div class='block'>
                     <p>
                         <router-link class='item-big' :to="{ path: '/bio' }">BIO</router-link>
@@ -59,7 +64,7 @@
                     </p>
 
                     <p>
-                        <router-link class='item-big' :to="{ path: '/contacto' }">CONTACTO</router-link>
+                        <div class='item-big'>CONTACTO</div>
                     </p>
                 </div>
             </div>
@@ -301,6 +306,7 @@
         computed: mapState([
             'obras',
             'ilustraciones',
+            'murales',
             'navigation'
         ]),
 
@@ -359,7 +365,7 @@
     }
 
     nav a:hover {
-        color: #ff0;
+        text-decoration: underline
     }
 
     nav .work a:nth-of-type(1n){
@@ -416,7 +422,8 @@
         width: 40%;
         vertical-align: top;
         text-align: left;
-        margin-top: 50px;
+        margin-bottom: 20px;
+        line-height: 24px;
     }
 
     nav video {
@@ -429,6 +436,30 @@
     .items {
         max-width: 900px;
         margin: auto;
+        display: flex;
+        align-items: normal;
+        justify-content: flex-start;
+        height: 570px;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-top:100px;
+    }
+
+    nav::after{
+        content: "";
+        display: block;
+        position: fixed;
+        pointer-events: none;
+        bottom: 0;
+        height: 100px;
+        width: 100%;
+        left: 0;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffff00+0,ffff00+100&0+0,1+100 */
+background: -moz-linear-gradient(top, rgba(255,255,0,0) 0%, rgba(255,255,0,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(255,255,0,0) 0%,rgba(255,255,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(255,255,0,0) 0%,rgba(255,255,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffff00', endColorstr='#ffff00',GradientType=0 ); /* IE6-9 */
+        z-index: 2;
     }
 
     .social-icons {
@@ -454,8 +485,16 @@
             width: 80%;
             margin-top: 0;
         }
+        nav .items
+        {
+            flex-direction: row;
+            padding: 20px;
+            margin-top: 0;
+        }
         nav{
             overflow: auto;
+            display: block;
+            margin-top: 0;
         }
         nav video{
             position: static;
