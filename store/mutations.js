@@ -5,7 +5,47 @@ import { initialStore } from './index';
 const mutations = {
     
   setHome(state, { obras, ilustraciones, randomStuff, murales }) {
-    state.home = shuffleArray([
+    const all = []
+    murales.forEach(mural => {
+      if(mural.data.series.length) {
+        mural.data.series.forEach(m => {
+          all.push({
+            id: mural.id,
+            type: 'mural',
+            title: mural.data.titulo[0].text,
+            image: m.imagen,
+            link: `murales/${mural.id}`,
+          });
+        })
+      }
+    })
+    obras.forEach(obra => {
+      if(obra.data.imagenes.length) {
+        obra.data.imagenes.forEach(o => {
+          all.push({
+            id: obra.id,
+            type: 'obras',
+            title: obra.data.titulo[0].text,
+            image: o.imagen,
+            link: `obras/${obra.id}`,
+          });
+        })
+      }
+    })
+    ilustraciones.forEach(ilustracion => {
+      if(ilustracion.data.series.length) {
+        ilustracion.data.series.forEach(i => {
+          all.push({
+            id: ilustracion.id,
+            type: 'ilustraciones',
+            title: ilustracion.data.titulo[0].text,
+            image: i.imagen,
+            link: `obras/${ilustracion.id}`,
+          });
+        })
+      }
+    })
+    /* state.home = shuffleArray([
       ...obras.map(obra => obra.data.imagenes.length ? {
         id: obra.id,
         type: 'obras',
@@ -26,16 +66,9 @@ const mutations = {
         title: '',
         image: random.data.imagen,
         link: random.data.link.url
-      })),
-      ...murales.map(mural => mural.data.series.length ? {
-        id: mural.id,
-        type: 'mural',
-        title: mural.data.titulo[0].text,
-        image: randomItem(mural.data.series).imagen,
-        link: `murales/${mural.id}`,
-      }: null),
-    ]);
-    state.home = [ ...state.home.filter(item => item !== null) ];
+      })), 
+    ]); */
+    state.home = shuffleArray([ ...all.filter(item => item !== null) ]);
   },
 
   setBio(state, bio) {
