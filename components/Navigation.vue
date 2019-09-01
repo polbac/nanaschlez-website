@@ -2,13 +2,12 @@
     <div>
         <h1>
             <div id='logo'>
-                <router-link :to="{ path: '/' }"><img src="~/assets/logo.png" alt=""></router-link>
+                <router-link :to="{ path: '/' }">NANA SCHLEZ</router-link>
             </div>
         </h1>
 
         <nav v-bind:class="{ active: navigation.showing }">
 
-            <video autoplay loop src="~/assets/video-nav.mp4"></video>
 
             <div class='close' v-on:click="hide">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -35,37 +34,32 @@
             <div class='items'>
                 <div class='block'>
                     <p>
-                        <router-link class='item-big' :to="{ path: '/' }">Home</router-link>
+                        <router-link class='item-big' :to="{ path: '/' }">HOME</router-link>
                     </p>
                 </div>
             
                 
                 <div class='block'>
-                    <p class='item-big'>Obras</p>
+                    <p class='item-big'>OBRAS</p>
                     <router-link v-bind:to="{ path: `/obras/${obra.id}`}"  v-for='obra in obras'>{{obra.data.titulo[0].text}}</router-link>
                 </div>
 
                 <div class='block'>
-                    <p>Ilustraciones</p>
+                    <p>ILUSTRACIONES</p>
                     <a v-bind:href="`/ilustraciones/${ilustracion.id}`" v-for='ilustracion in ilustraciones'>{{ilustracion.data.titulo[0].text}}</a>
                 </div>
                 
                 <div class='block'>
                     <p>
-                        <router-link class='item-big' :to="{ path: '/bio' }">Acerca de mí</router-link>
+                        <router-link class='item-big' :to="{ path: '/bio' }">BIO</router-link>
                     </p>
                     
                     <p>
-                        <router-link class='item-big' :to="{ path: '/workshop' }">Talleres</router-link>
-                    </p>
-
-
-                    <p>
-                        <router-link class='item-big' :to="{ path: '/exposiciones' }">Exposiciones</router-link>
+                        <router-link class='item-big' :to="{ path: '/workshop' }">TALLERES</router-link>
                     </p>
 
                     <p>
-                        <router-link class='item-big' :to="{ path: '/contacto' }">Contacto</router-link>
+                        <router-link class='item-big' :to="{ path: '/contacto' }">CONTACTO</router-link>
                     </p>
                 </div>
             </div>
@@ -73,7 +67,9 @@
             
         </nav>
         <div id='item-menu' v-on:click="show">
-            <img src="~/assets/menu.png" alt="">
+            -<br/>
+            -<br/>
+            -
         </div>
 
 
@@ -152,7 +148,7 @@
       </div>
 
       <div class="social-icons-icon">
-          <a href="">
+          <a href="https://www.behance.net/nanaschlez" target="_blank">
               <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 49.459 49.459" style="enable-background:new 0 0 49.459 49.459;" xml:space="preserve">
 <g>
@@ -238,7 +234,7 @@
       </div>
 
       <div class="social-icons-icon">
-          <a href="">
+          <a href="mailto:nanaschlez@gmail.com" target="_blank">
               <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 52.651 52.651" style="enable-background:new 0 0 52.651 52.651;" xml:space="preserve">
 <g>
@@ -318,6 +314,18 @@
 </script>
 
 <style>
+    @keyframes blinker {
+        49% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        99% {
+            opacity: 0;
+        }
+    }
+
     nav {
         display: none;
         position: fixed;
@@ -367,17 +375,19 @@
         position: fixed;
         right: 10px;
         top: 0px;
+        cursor: pointer;
     }
     #item-menu {
         cursor: pointer;
-        color: #ff0;
-        text-shadow: 1px 1px 0 black;
+        color: #000;
         position: fixed;
         top: 15px;
         right: 25px;
         z-index: 10;
         width: 30px;
         text-align: center;
+        line-height: 9px;
+        font-size: 41px;
     }
     #item-menu img {
         width: 100%;
@@ -388,6 +398,13 @@
         top: 15px;
         left: 20px;
         z-index: 999;
+        animation: blinker 0.5s linear infinite;
+        letter-spacing: 1px;
+    }
+
+    #logo a{
+        color: black;
+        text-decoration: none;
     }
 
     #logo img {
@@ -419,11 +436,16 @@
         bottom: 10px;
         left: 27px;
         width: 30px;
+        z-index: 20;
     }
 
     .social-icons svg {
         width: 20px;
         height: 20px
+    }
+
+    .social-icons svg:hover {
+
     }
 
     @media(max-width:640px){

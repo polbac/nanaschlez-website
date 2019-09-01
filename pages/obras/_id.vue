@@ -21,11 +21,18 @@
 <script>
 import config from '../../config';
 import { SectionTitle, Parraph, ImageComponent } from '../../components'
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
+import { widhtHead } from '../../utils/head'
+
 
 export default {
-    head: {
-        title: `${config.title} - obras`
+    head() {
+        return widhtHead(
+            `${this.obra.data.titulo[0].text}`, 
+            this.obra.data.descripcion[0].text,
+            this.obra.data.imagenes[0].imagen.url,
+            this.$route.fullPath
+        )
     },
     layout: 'default',
     components: {
@@ -33,7 +40,9 @@ export default {
         Parraph,
         ImageComponent,
     },
-    fetch: ({ store, params }) => store.dispatch({ type: 'fetchObraById', id: params.id }),
+    async fetch({ store, params }){
+        await store.dispatch({ type: 'fetchObraById', id: params.id })
+    },
     computed: mapState({
         obra: function ({ obras }) {
             const id = this.$route.params.id;

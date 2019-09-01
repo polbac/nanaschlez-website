@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div v-if="obra">
         <SectionTitle v-bind:text='obra.data.titulo[0].text' />
         
         <div class='description'>
@@ -27,13 +27,24 @@
 </template>
 
 <script>
-import config from '../../config';
+import { mapState } from 'vuex'
+import config from '../../config'
 import { SectionTitle, ImageComponent, Parraph } from '../../components'
-import { mapState } from 'vuex';
+import { widhtHead } from '../../utils/head'
 
 export default {
-    head: {
-        title: `${config.title} - obras`
+    head() {
+        if(this.obra) {
+            return widhtHead(
+                `${this.obra.data.titulo[0].text}`, 
+                this.obra.data.descripcion[0].text,
+                this.obra.data.series[0].imagen.url,
+                this.$route.fullPath
+            )
+        }
+
+        return {}
+        
     },
     layout: 'default',
     components: {
@@ -41,7 +52,9 @@ export default {
         ImageComponent,
         Parraph,
     },
-    fetch: ({ store, params }) => store.dispatch({ type: 'fetchIlustracionById', id: params.id }),
+    fetch: ({ store, params }) => {
+        store.dispatch({ type: 'fetchIlustracionById', id: params.id })
+    },
     computed: mapState({
         obra: function ({ ilustraciones }) {
             const id = this.$route.params.id;

@@ -86,8 +86,9 @@
         z-index: 10;
     }
 
-    #workshops-marquee a {
+    #workshops-marquee, #workshops-marquee span {
         color: black;
+        font-weight: bold;
     }
 
     #workshops-marquee::before{

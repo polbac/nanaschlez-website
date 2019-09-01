@@ -3,12 +3,12 @@ import { fetchWorkshop, getObras, getBio, getIlustraciones, getRandomStuff, fetc
 
 const actions = {
 
-    nuxtServerInit ({ dispatch }) {
-        dispatch({ type: 'fetchHome' });
+    async nuxtServerInit ({ dispatch }) {
+        await dispatch({ type: 'fetchHome' });
     },
 
     async fetchHome({commit, state}) {
-        
+
         if(state.home !== null){
             return null;
         }
@@ -49,7 +49,7 @@ const actions = {
         commit('setIlustracion', detail)
     },
 
-    async fetchWorkshop({ commit }) {
+    async fetchWorkshop({ commit }) {       
         const workshop = await fetchWorkshop();
         commit('setWorkshop', workshop)
     },
