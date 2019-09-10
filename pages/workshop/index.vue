@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class='talleres'>
     <SectionTitle v-bind:text='workshop.data.titulo[0].text' />
+    <div class='tall-text'>
     <Parraph v-bind:text='workshop.data.descripcion' />
+    </div>
 
     <div v-masonry transition-duration="0.3s" item-selector=".item" class="masonry-container">
       <div v-masonry-tile class="item" :key="index" v-for="(item, index) in workshop.data.galeria">
@@ -50,7 +52,10 @@ export default {
 </script>
 
 <style>
-
+.talleres{
+  line-height: 30px;
+  color: blue;  
+}
 .item {
   width: 30%;
   padding:10px;
@@ -59,6 +64,10 @@ export default {
 
 .masonry-container {
   margin-top: 50px;
+}
+.tall-text{
+  max-width: 600px;
+  text-align: justify;
 }
 
 @media (max-width: 640px) {

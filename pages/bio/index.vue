@@ -1,8 +1,12 @@
 <template>
-  <div>
+  <div class='bio'>
     <SectionTitle v-bind:text='bio.data.titulo[0].text' />
+    <div class='bio-content'>
     <Parraph v-bind:text='bio.data.descripcion' />
-    <ImageComponent v-bind:source='bio.data.imagen' />
+    </div>
+    <div class='image-container-bio'>
+      <ImageComponent v-bind:source='bio.data.imagen' />
+    </div>
   </div>
   
 </template>
@@ -31,4 +35,21 @@ export default {
 </script>
 
 <style>
+.bio{
+    line-height: 30px;
+    color: #c79810;
+}
+.bio .image-container-bio{
+  position: absolute;
+  left: 20px;
+  max-width: 600px;
+  width: 90%;
+  margin: auto;
+  margin-top: 90px;
+  margin-bottom:200px;
+}
+.bio-content{
+max-width: 600px;
+text-align: justify;
+}
 </style>

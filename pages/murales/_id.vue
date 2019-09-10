@@ -1,9 +1,11 @@
 <template>
     <div v-if="obra">
-        <SectionTitle v-bind:text='obra.data.titulo[0].text' />
-        
-        <div class='description'>
-            <Parraph v-bind:text='obra.data.descripcion' />
+        <div v-bind:style="{ color: obra.data.color }">
+            <SectionTitle v-bind:text='obra.data.titulo[0].text' />
+            
+            <div class='description'>
+                <Parraph v-bind:text='obra.data.descripcion' />
+            </div>
         </div>
 
         <div v-for="image in obra.data.series" >
@@ -77,7 +79,7 @@ export default {
 
     .description{
         margin-bottom: 50px;
-        color: gray;
+        line-height: 30px;
     }
 
     .buy-poster{

@@ -1,11 +1,13 @@
 <template>
     <div v-if="obra">
+        <div v-bind:style="{ color: obra.data.color }">
         <SectionTitle v-bind:text='obra.data.titulo[0].text' />
         
         <div class='description'>
             <Parraph v-bind:text='obra.data.descripcion' />
         </div>
 
+        </div>
         <div v-for="image in obra.data.series" >
             <div class='pic'>
                 <ImageComponent  v-bind:source="image.imagen" />
@@ -13,11 +15,11 @@
                 <div class='foot-desc' v-if="image.descripcion1[0]">{{image.descripcion1[0].text}}</div>
                 <div class='foot-tec' v-if="image.tecnica[0]">{{image.tecnica[0].text}}</div>
 
-                <div class='sell' v-if="obra.data.se_vende=='Si'">
+                <!-- <div class='sell' v-if="obra.data.se_vende=='Si'">
                     <div clas="tit"><b>¿LO QUERÉS EN POSTER?</b></div>
                     Sale $ {{obra.data.precio}}
                     <button class='buy-poster'>COMPRAR</button>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -84,7 +86,8 @@ export default {
 
     .description{
         margin-bottom: 50px;
-        color: gray;
+        line-height: 30px;
+        
     }
 
     .buy-poster{

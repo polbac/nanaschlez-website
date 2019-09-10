@@ -15,6 +15,7 @@
 
 <script>
     import { mapState } from 'vuex';
+    const emojies = ['🔥', '🐱', '🔮', '🌈']
     export default {
         name: 'WorshopsMarquee',
         data: () => {
@@ -63,8 +64,16 @@
     }
 
     function splitCharacters(characters) {
+        let emojiIndex = -1;
         return characters.split('')
-                .map(ch => ch === ' ' ? `<span class='space'>${ch}</span>` : `<span>${ch}</span>`)
+                .map(ch => {
+                    if(ch === '-') {
+                        emojiIndex++;
+                        return emojies[emojiIndex]
+                    }
+                    return ch
+                })
+                .map(ch => ch === ' ' ? `<span class='space'>${ch}</span>` : `<span>${ch}</span>`)                
                 .join('');
     }
 </script>
@@ -83,7 +92,7 @@
         font-size: 19px;
         overflow: hidden;
         cursor: pointer;
-        z-index: 10;
+        z-index: 999999;
     }
 
     #workshops-marquee, #workshops-marquee span {
