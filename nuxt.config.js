@@ -1,9 +1,7 @@
-import config from './config';
-
 export default {
   loading: '~/components/Loading.vue',
   head: {
-    title: config.title
+    title: 'nana schlez'
   },
   generate: {
     routes: [
