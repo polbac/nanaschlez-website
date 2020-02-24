@@ -2,6 +2,7 @@
   "name": "nanaschlez",
   "description": "Nana Schlez artist website",
   "dependencies": {
+    "access-log": "^0.4.1",
     "axios": ">=0.18.1",
     "nuxt-edge": "^2.9.0-26017930.7d08ff1f",
     "prismic-javascript": "^2.0.1",
@@ -10,6 +11,7 @@
     "vue-masonry": "^0.11.7"
   },
   "devDependencies": {
+    "node-fetch": "^2.5.0",
     "webpack-bundle-analyzer": ">=3.3.2"
   },
   "scripts": {

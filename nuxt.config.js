@@ -15,5 +15,8 @@ export default {
   },
   plugins: [
     { src: '~/plugins/masonry', ssr: false }
-   ]
+   ],
+   serverMiddleware: [
+    '~log.js'
+  ]
 }
