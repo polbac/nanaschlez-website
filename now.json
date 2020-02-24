@@ -1,6 +1,11 @@
 {
-    "version": 1,
-    "name": "nanaschlez",
-    "alias": ["nanas-chlez.now.sh"],
-    "type": "npm"
+  "version": 2,
+  "alias": ["nanas-chlez.now.sh"],
+  "builds": [
+      {
+        "src": "nuxt.config.js",
+        "use": "@nuxtjs/now-builder",
+        "config": {}
+      }
+    ]
   }
