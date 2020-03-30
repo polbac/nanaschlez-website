@@ -1,36 +1,61 @@
 
-import { fetchWorkshop, getObras, getBio, getIlustraciones, getMurales, getRandomStuff, fetchObraById, fetchIlustracionById, fetchMuralById } from '../respository/prismic'
+import { getShop, getObra, fetchWorkshop, getObras, getBio, getIlustraciones, getMurales, getRandomStuff, fetchObraById, fetchIlustracionById, fetchMuralById } from '../respository/prismic'
 
 const actions = {
 
-    async nuxtServerInit ({ dispatch }) {
-        await dispatch({ type: 'fetchHome' });
+    async fetchSelf({commit}) {
+        let obra
+        try {
+            obra = await getObra('obra');
+        } catch(err) {
+            console.log('err', err)
+        }
+        commit('setObraList', obra)
     },
 
-    async fetchHome({commit, state}) {
+    async fetchCommitment({commit}) {
+        let obra
+        try {
+            obra = await getObra('pedido');
+        } catch(err) {
+            console.log('err', err)
+        }
+        commit('setPedidoList', obra)
+    },
 
-        if(state.home !== null){
-            return null;
+    async fetchBooks({commit}) {
+        let obra
+        try {
+            obra = await getObra('books');
+        } catch(err) {
+            console.log('err', err)
+        }
+        commit('setBooksList', obra)
+    },
+
+    async fetchShop({commit}) {
+        let shop
+        try {
+            shop = await getShop();
+        } catch(err) {
+            console.log('err', err)
+        }
+        commit('setShop', shop)
+    },
+
+    
+    
+
+    async fetchObra({commit}) {
+        let ilustraciones
+
+        try {
+            ilustraciones = await getIlustraciones();
+        } catch(err) {
+            console.log('err', err)
         }
 
-        const obras = await getObras();
-        obras.results.forEach(obra => commit('setObra', obra));
-
-        const ilustraciones = await getIlustraciones();
-        ilustraciones.results.forEach(ilustracion => commit('setIlustracion', ilustracion));
-
-        const murales = await getMurales();
-        murales.results.forEach(mural => commit('setMural', mural));
-
-        const randomStuff = await getRandomStuff();
-        randomStuff.results.forEach(randomStuff => commit('setRandomStuff', randomStuff));
-
-        commit('setHome', { 
-            obras: obras.results, 
-            ilustraciones: ilustraciones.results,
-            murales: murales.results,
-            randomStuff: randomStuff.results,
-        });
+        commit('setIlustracionesList', ilustraciones)
     },
 
     async fetchBio({commit}) {

@@ -1,4 +1,5 @@
 <template>
+<div class='page-container'>
     <div v-if="obra">
         <div v-bind:style="{ color: obra.data.color }">
             <SectionTitle v-bind:text='obra.data.titulo[0].text' />
@@ -17,6 +18,7 @@
         </div>
 
         
+    </div>
     </div>
   
 </template>

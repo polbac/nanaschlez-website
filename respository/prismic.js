@@ -12,12 +12,36 @@ const api = () => new Promise(async (resolve, reject) => {
     resolve(global.prismic);
 });
 
-export const getBio = () => api().then(
+export const getObra = (type) => api().then(
+    prismic => {
+        return prismic.query(
+            [
+                Prismic.Predicates.at('document.tags', [type]),
+            ]
+        )
+    }
+);
+
+export const getCommitment = () => api().then(
+    prismic => {
+        return prismic.query(
+            [
+                Prismic.Predicates.at('document.tags', ['pedido']),
+            ]
+        )
+    }
+);
+
+export const getBio = () => api().then( 
     prismic => prismic.getByID(config.prismic.documents.bio)
 );
 
 export const getRandomStuff = () => api().then(
     prismic => prismic.query(Prismic.Predicates.at('document.type', 'random-stuff'))
+);
+
+export const getShop = () => api().then(
+    prismic => prismic.query(Prismic.Predicates.at('document.type', 'shop'))
 );
 
 export const getObras = () => api().then(

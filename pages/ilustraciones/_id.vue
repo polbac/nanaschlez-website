@@ -1,26 +1,27 @@
 <template>
-    <div v-if="obra">
+    <div v-if="obra" class="page-container">
         <div v-bind:style="{ color: obra.data.color }">
-        <SectionTitle v-bind:text='obra.data.titulo[0].text' />
+        <SectionTitle  v-if="obra.data.titulo.length> 1" v-bind:text='obra.data.titulo[0].text' />
         
-        <div class='description'>
-            <Parraph v-bind:text='obra.data.descripcion' />
-        </div>
+            <div class='description'>
+                <Parraph  v-if="obra.data.descripcion.length> 1" v-bind:text='obra.data.descripcion' />
+            </div>
 
         </div>
-        <div v-for="image in obra.data.series" >
-            <div class='pic'>
+
+        <div v-for="image in obra.data.series" class='pic'>
+        
+            
                 <ImageComponent  v-bind:source="image.imagen" />
-                <div class='foot-title' v-if="image.titulo1[0]">{{image.titulo1[0].text}}</div>
-                <div class='foot-desc' v-if="image.descripcion1[0]">{{image.descripcion1[0].text}}</div>
-                <div class='foot-tec' v-if="image.tecnica[0]">{{image.tecnica[0].text}}</div>
+                <div class='foot-title' v-if="image.titulo.length> 1">{{image.titulo[0].text}}</div>
+                <div class='foot-desc' v-if="image.descripcion.length> 1">{{image.descripcion[0].text}}</div>
+                <div class='foot-tec' v-if="image.tecnica.length > 1">{{image.tecnica[0].text}}</div>
 
                 <!-- <div class='sell' v-if="obra.data.se_vende=='Si'">
                     <div clas="tit"><b>¿LO QUERÉS EN POSTER?</b></div>
                     Sale $ {{obra.data.precio}}
                     <button class='buy-poster'>COMPRAR</button>
                 </div> -->
-            </div>
         </div>
 
         
@@ -38,10 +39,10 @@ export default {
     head() {
         if(this.obra) {
             return widhtHead(
-                `${this.obra.data.titulo[0].text}`, 
-                this.obra.data.descripcion[0].text,
-                this.obra.data.series[0].imagen.url,
-                this.$route.fullPath
+                 `${this.obra.data.titulo.length > 1 ? this.obra.data.titulo[0].text : ''}`, 
+            this.obra.data.descripcion.length > 1 ? this.obra.data.descripcion[0].text : '',
+            this.obra.data.series.length > 1 ? this.obra.data.series[0].imagen.url : '',
+            this.$route.fullPath
             )
         }
 
@@ -60,8 +61,24 @@ export default {
     computed: mapState({
         obra: function ({ ilustraciones }) {
             const id = this.$route.params.id;
-            const ilustracion = ilustraciones.find(obra => obra.id === id);
-            return ilustracion;
+            const obra = ilustraciones.find(obra => obra.id === id);
+
+            
+            obra.data.titulo = obra.data.titulo || obra.data.titulo1 || []
+            obra.data.descripcion = obra.data.descripcion || obra.data.descripcion1 || []
+            obra.data.series = obra.data.series || obra.data.series1 || []
+
+            obra.data.series = obra.data.series.map(im => {
+                im.titulo = im.titulo || im.titulo1 || [];
+                im.descripcion = im.descripcion || im.descripcion1 || [];
+                im.tecnica = im.tecnica || im.tecnica1 || [];
+
+                return im
+            })
+
+            console.log('obra', obra)
+    
+            return obra;
         }
     }),
     
@@ -69,12 +86,7 @@ export default {
 </script>
 
 <style>
-    .pic{
-        margin-bottom: 60px;
-        border-bottom: 1px solid gray;
-        padding-bottom: 60px;
-        text-align: center
-    }
+   
 
     .foot-title{
         margin-top: 20px;

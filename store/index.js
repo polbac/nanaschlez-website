@@ -14,6 +14,10 @@ export const initialStore = {
     murales: config.prismic.documents.murales,
     workshop: null,
     randomStuff: null,
+    books: null,
+    obra: null,
+    shop: null,
+    commitment: null,
     navigation: {
       showing: false,
     },

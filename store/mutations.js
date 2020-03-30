@@ -3,51 +3,7 @@ import { randomItem, shuffleArray } from '../utils';
 import { initialStore } from './index';
 
 const mutations = {
-    
-  setHome(state, { obras, ilustraciones, randomStuff, murales }) {
-    const all = []
-    murales.forEach(mural => {
-      if(mural.data.series.length) {
-        mural.data.series.forEach(m => {
-          all.push({
-            id: mural.id,
-            type: 'mural',
-            title: mural.data.titulo[0].text,
-            image: m.imagen,
-            link: `murales/${mural.id}`,
-          });
-        })
-      }
-    })
-    obras.forEach(obra => {
-      if(obra.data.imagenes.length) {
-        obra.data.imagenes.forEach(o => {
-          all.push({
-            id: obra.id,
-            type: 'obras',
-            title: obra.data.titulo[0].text,
-            image: o.imagen,
-            link: `obras/${obra.id}`,
-          });
-        })
-      }
-    })
-    ilustraciones.forEach(ilustracion => {
-      if(ilustracion.data.series.length) {
-        ilustracion.data.series.forEach(i => {
-          all.push({
-            id: ilustracion.id,
-            type: 'ilustraciones',
-            title: ilustracion.data.titulo[0].text,
-            image: i.imagen,
-            link: `ilustraciones/${ilustracion.id}`,
-          });
-        })
-      }
-    })
-    
-    state.home = shuffleArray([ ...all.filter(item => item !== null) ]);
-  },
+  
 
   setBio(state, bio) {
     state.bio = bio;
@@ -59,6 +15,144 @@ const mutations = {
 
   setRandomStuff(state, randomStuff) {
     state.randomStuff = randomStuff;
+  },
+
+  setObraList(state, obra) {
+    state.obra = obra.results.map((item) => {
+      
+      switch(item.type) {
+        case 'ilustraciones':
+          return {
+            id: item.id,
+            title: item.data.titulo[0].text,
+            image: item.data.series[0].imagen.url,
+            link: `/ilustraciones/${item.id}`,
+            type: 'ilustraciones',
+          }
+          
+      case 'art':
+          return {
+            id: item.id,
+            title: item.data.titulo[0].text,
+            image: item.data.imagenes[0].imagen.url,
+            link: `/obras/${item.id}`,
+            type: 'art',
+          }
+        case 'obras':
+            return {
+              id: item.id,
+              title: item.data.titulo[0].text,
+              image: item.data.imagenes1[0].imagen.url,
+              link: `/obras/${item.id}`,
+              type: 'art',
+            }
+
+      case 'mural':
+        return {
+          id: item.id,
+          title: item.data.titulo[0].text,
+          image: item.data.imagenes[0].imagen.url,
+          link: `/murales/${item.id}`,
+          type: 'art',
+        }
+
+        return null;
+    }
+
+      
+
+      
+    }).filter(function (el) {
+      return el != null;
+    })
+  },
+
+  setPedidoList(state, obra) {
+    state.pedido = obra.results.map((item) => {
+      switch(item.type) {
+        case 'ilustraciones':
+          return {
+            id: item.id,
+            title: item.data.titulo[0].text,
+            image: item.data.series[0].imagen.url,
+            link: `/ilustraciones/${item.id}`,
+            type: 'ilustraciones',
+          }
+          
+      case 'art':
+          return {
+            id: item.id,
+            title: item.data.titulo[0].text,
+            image: item.data.imagenes[0].imagen.url,
+            link: `/obras/${item.id}`,
+            type: 'art',
+          }
+          case 'obras':
+            return {
+              id: item.id,
+              title: item.data.titulo[0].text,
+              image: item.data.imagenes1[0].imagen.url,
+              link: `/obras/${item.id}`,
+              type: 'art',
+            }
+          case 'mural':
+
+            return {
+              id: item.id,
+              title: item.data.titulo[0].text,
+              image: item.data.series[0].imagen.url,
+              link: `/murales/${item.id}`,
+              type: 'art',
+            }
+            return null;
+      }
+    }).filter(function (el) {
+      return el != null;
+    })
+  },
+
+    setBooksList(state, obra) {
+      state.books = obra.results.map((item) => {
+        switch(item.type) {
+          case 'ilustraciones':
+            return {
+              id: item.id,
+              title: item.data.titulo[0].text,
+              image: item.data.series[0].imagen.url,
+              link: `/ilustraciones/${item.id}`,
+              type: 'ilustraciones',
+            }
+            
+        case 'art':
+            return {
+              id: item.id,
+              title: item.data.titulo[0].text,
+              image: item.data.imagenes[0].imagen.url,
+              link: `/obras/${item.id}`,
+              type: 'art',
+            }
+            case 'obras':
+              return {
+                id: item.id,
+                title: item.data.titulo[0].text,
+                image: item.data.imagenes1[0].imagen.url,
+                link: `/obras/${item.id}`,
+                type: 'art',
+              }
+            case 'mural':
+              return {
+                id: item.id,
+                title: item.data.titulo[0].text,
+                image: item.data.series[0].imagen.url,
+                link: `/murales/${item.id}`,
+                type: 'art',
+              }
+        }
+
+        return null;
+      }).filter(function (el) {
+        return el != null;
+      })
   },
 
   setObra(state, detail) {
@@ -101,6 +195,10 @@ const mutations = {
 
   showNavigation(state) {
     state.navigation.showing = true;
+  },
+
+  setShop(state, shop) {
+    state.shop = shop;
   },
 
   hideNavigation(state) {
