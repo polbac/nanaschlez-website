@@ -1,17 +1,18 @@
 <template>
   <div class='talleres'>
-    <SectionTitle v-bind:text='workshop.data.titulo[0].text' />
-    <div class='tall-text'>
-    <Parraph v-bind:text='workshop.data.descripcion' />
-    </div>
-
-    <div v-masonry transition-duration="0.3s" item-selector=".item" class="masonry-container">
-      <div v-masonry-tile class="item" :key="index" v-for="(item, index) in workshop.data.galeria">
-        <img class='image-gallery' v-bind:src='item.image.url' width='100%' />
+    <div class="page-container">
+      <SectionTitle v-bind:text='workshop.data.titulo[0].text' />
+      <div class='tall-text'>
+      <Parraph v-bind:text='workshop.data.descripcion' />
       </div>
-    </div>
 
-    
+      <div v-masonry transition-duration="0.3s" item-selector=".item" class="masonry-container">
+        <div v-masonry-tile class="item" :key="index" v-for="(item, index) in workshop.data.galeria">
+          <img class='image-gallery' v-bind:src='item.image.url' width='100%' />
+        </div>
+      </div>
+
+    </div>  
 
   </div>
   

@@ -22,12 +22,9 @@ import { SectionTitle, Parraph, ImageComponent } from '../../components'
 import { mapState } from 'vuex'
 import { widhtHead } from '../../utils/head'
 
-
 export default {
     async fetch({ store }) {
-
         await store.dispatch({ type: 'fetchShop' })
-        
     },
 
     components: {

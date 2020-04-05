@@ -58,12 +58,17 @@ export default {
     font-family: 'Fivo Sans', helvetica, arial, sans-serif;
     background: #ffff0005;
   }
-  .container {
+  .container{
     max-width: 1024px;
     width: 95%;
     margin: auto;
     text-align: left;
     padding-top: 100px;
+  }
+  @media (max-width: 600px){
+    .container{
+      padding-top: 20px;
+    }
   }
   p {
     font-size: 20px;
@@ -72,6 +77,7 @@ export default {
   .page-container{
     max-width: 600px;
     margin-left: 40%;
+    margin-top: 50px;
   }
 
   .pic{
@@ -79,6 +85,7 @@ export default {
         text-align: center;
         margin-bottom: 50px;
     }
+
 
     .pic img{
       width: 100%;
@@ -88,6 +95,10 @@ export default {
     .page-container{
       max-width: 600px;
       margin-left: 0;
+      margin-top: 50px;
+    }
+    .pic{
+        width: 100%;
     }
   }
 </style>

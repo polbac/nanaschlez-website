@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img v-bind:src='source.url' v-bind:alt='source.alt' />
+        <img class="imageComp" v-bind:src='source.url' v-bind:alt='source.alt' />
     </div>
 </template>
 
@@ -18,8 +18,9 @@ export default {
 
 <style>
 
-    img{
+    .imageComp{
         width: 100%;
+        
     }
 </style>
 

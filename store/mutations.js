@@ -18,8 +18,11 @@ const mutations = {
   },
 
   setObraList(state, obra) {
+    let back = new Date();
+    back.setDate(back.getDate() - 99999999);
+    back = back.getTime()
+
     state.obra = obra.results.map((item) => {
-      
       switch(item.type) {
         case 'ilustraciones':
           return {
@@ -28,6 +31,7 @@ const mutations = {
             image: item.data.series[0].imagen.url,
             link: `/ilustraciones/${item.id}`,
             type: 'ilustraciones',
+            date: item.data.date ? new Date(item.data.date).getTime() : back,
           }
           
       case 'art':
@@ -37,6 +41,7 @@ const mutations = {
             image: item.data.imagenes[0].imagen.url,
             link: `/obras/${item.id}`,
             type: 'art',
+            date: item.data.date ? new Date(item.data.date).getTime() : back,
           }
         case 'obras':
             return {
@@ -45,6 +50,7 @@ const mutations = {
               image: item.data.imagenes1[0].imagen.url,
               link: `/obras/${item.id}`,
               type: 'art',
+              date: item.data.date ? new Date(item.data.date).getTime() : back,
             }
 
       case 'mural':
@@ -54,16 +60,16 @@ const mutations = {
           image: item.data.imagenes[0].imagen.url,
           link: `/murales/${item.id}`,
           type: 'art',
+          date: item.data.date ? new Date(item.data.date).getTime() : back,
         }
 
         return null;
     }
-
-      
-
       
     }).filter(function (el) {
       return el != null;
+    }).sort((a, b) => {
+      return b.date - a.date;
     })
   },
 

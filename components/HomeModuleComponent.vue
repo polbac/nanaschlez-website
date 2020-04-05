@@ -89,7 +89,6 @@
     height: 85vh;
     width: 100%;   
     display: inline-block;
-    position: relative;
     text-align: center;
     vertical-align: top;
     margin-bottom: 100px;
@@ -129,30 +128,5 @@
     -khtml-opacity: 0;
     opacity: 0;
 }
-
-.image-container{
-    border: 2px solid #eee;
-    position: relative;
-}
-
-.image-container{
-        content: "";
-        display: block;
-        position: absolute;
-        bottom: 0;
-        height: 100px;
-        width: 100%;
-        left: 0;
-
-        z-index: 0;
-        
-    }
-
-    @media(max-width: 640px){
-        .home-module-component{
-            height: 50vh;
-        }
-    }
-    
 </style>
 

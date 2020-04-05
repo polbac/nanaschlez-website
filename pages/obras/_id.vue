@@ -29,7 +29,7 @@ import { widhtHead } from '../../utils/head'
 
 export default {
     head() {
-        console.log('head', this.obra)
+
         return widhtHead(
             `${this.obra.data.titulo.length > 1 ? this.obra.data.titulo[0].text : ''}`, 
             this.obra.data.descripcion.length > 1 ? this.obra.data.descripcion[0].text : '',

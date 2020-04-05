@@ -12,16 +12,17 @@
             </div>
         </h1>
 
+        <div class='overlay' v-bind:style="{display: show ? 'block' : 'none' }" />
+
         <nav class="desktop">
-            <!--a class="menu" v-on:click="showNavigation()">MENU</a-->
-            <span class='other-items'>
-                <router-link :to="{ path: '/work/art' }">OBRA</router-link>
-                <router-link :to="{ path: '/work/ilustraciones' }">ILUSTRACIONES</router-link>
-                <router-link :to="{ path: '/work/commitment' }">A PEDIDO</router-link>
-                <router-link :to="{ path: '/work/books' }">LIBROS</router-link>
-                <router-link :to="{ path: '/shop' }">SHOP</router-link>
-                <router-link :to="{ path: '/workshop' }" class="workshop">TALLERES</router-link>
-                <router-link :to="{ path: '/bio' }">BIO</router-link>
+            <a v-bind:style="{display: !show ? 'block' : 'none' }" class="menu" v-on:click="showNavigation()">MENU</a>
+            <span class='other-items' v-bind:style="{display: show ? 'block' : 'none' }">
+                <router-link v-bind:class='checkActive("work/art")' v-on:click.native="hideNavigation()" :to="{ path: '/work/art' }">OBRA</router-link>
+                <router-link v-bind:class='checkActive("work/ilustraciones")' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones' }">ILUSTRACIONES</router-link>
+                <router-link v-bind:class='checkActive("work/commitment")' v-on:click.native="hideNavigation()" :to="{ path: '/work/commitment' }">A PEDIDO</router-link>
+                <router-link v-bind:class='checkActive("work/books")' v-on:click.native="hideNavigation()" :to="{ path: '/work/books' }">LIBROS</router-link>
+                <router-link v-bind:class='checkActive("shop")' v-on:click.native="hideNavigation()" :to="{ path: '/shop' }">SHOP</router-link>
+                <router-link v-bind:class='checkActive("bio")' v-on:click.native="hideNavigation()" :to="{ path: '/bio' }">BIO</router-link>
             </span>
         </nav>
 
@@ -75,6 +76,18 @@
     
     export default {
 
+        watch: {
+            '$route': function (id) {
+            this.$forceUpdate()
+            }
+        },
+
+        data() {
+            return {
+                show: false,
+            }
+        },
+
         name: 'Navigation',
 
         props: ['categories'],
@@ -85,6 +98,23 @@
             'murales',
             'navigation'
         ]),
+
+        methods: {
+            showNavigation: function() {
+                this.show = true;    
+            },
+
+            hideNavigation: function() {
+                console.log('hideNavigation')
+                this.show = false;
+            },
+
+            checkActive: function(r) {
+                if (process.browser) {
+                    return document.location.pathname.indexOf(r) !== -1 ? 'active' : ''
+                }
+            }
+        }
     }
 </script>
 
@@ -99,6 +129,16 @@
         99% {
             opacity: 0;
         }
+    }
+
+    .overlay{
+        background: rgba(255,255,255,0.8);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
     }
     nav.desktop{
         display: block;
@@ -115,6 +155,10 @@
     }
     nav.desktop a:hover{
         font-weight: 100;
+    }
+
+    nav.desktop a.active:hover{
+        font-weight: 600;
     }
     nav.desktop a{
         font-size: 50px;
@@ -218,7 +262,9 @@
     #item-menu img {
         width: 100%;
     }
-
+    #logo:hover a{
+        color: #8588b7;
+    }
     #logo {
         position: fixed;
         top: 15px;
@@ -324,7 +370,7 @@
              right: 10px;
          }
     }
-
+    
     .animation-menu{
         animation-name: marquee;
         animation-duration: 10s;
@@ -344,6 +390,7 @@
     .menu{
         display: none;
     }
+
     @media (max-width: 600px) {
         .workshop{
             display: block;
@@ -354,5 +401,26 @@
         .other-items{
             display: none;
         }
+        nav.desktop{
+            left: 15px;
+        }
+        nav.desktop a{
+            font-size: 30px;
+        }
+
+        
     }
+
+    @media (min-width: 601px) {
+        .other-items{
+            display: block !important;
+        }
+        .menu{
+        display: none !important;
+    }
+    }
+
+    nav a.active{
+            filter: blur(2px) !important;
+        }
 </style>
