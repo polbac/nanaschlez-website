@@ -1,19 +1,20 @@
 <template>
     <div class="page-container">
         <div v-bind:style="{ color: obra.data.color }">
-        <SectionTitle  v-if="obra.data.titulo.length > 1" v-bind:text='obra.data.titulo[0].text' />
+
+        <SectionTitle  v-if="obra.data.titulo.length >= 1" v-bind:text='obra.data.titulo[0].text' />
         
         <div class='description'>
-            <Parraph v-if="obra.data.descripcion.length > 1" v-bind:text='obra.data.descripcion' />
+            <Parraph v-if="obra.data.descripcion.length >= 1" v-bind:text='obra.data.descripcion' />
         </div>
         </div>
 
         <div v-for="image in obra.data.imagenes" >
             <div class='pic'>
                 <ImageComponent  v-bind:source="image.imagen" />
-                <div class='foot-title' v-if="image.titulo.length > 1">{{image.titulo[0].text}}</div>
-                <div class='foot-desc' v-if="image.descripcion.length > 1">{{image.descripcion[0].text}}</div>
-                <div class='foot-tec' v-if="image.tecnica.length > 1">{{image.tecnica[0].text}}</div>
+                <div class='foot-title' v-if="image.titulo.length >= 1">{{image.titulo[0].text}}</div>
+                <div class='foot-desc' v-if="image.descripcion.length >= 1">{{image.descripcion[0].text}}</div>
+                <div class='foot-tec' v-if="image.tecnica.length >= 1">{{image.tecnica[0].text}}</div>
             </div>
         </div>
     </div>
@@ -31,9 +32,9 @@ export default {
     head() {
 
         return widhtHead(
-            `${this.obra.data.titulo.length > 1 ? this.obra.data.titulo[0].text : ''}`, 
-            this.obra.data.descripcion.length > 1 ? this.obra.data.descripcion[0].text : '',
-            this.obra.data.imagenes.length > 1 ? this.obra.data.imagenes[0].imagen.url : '',
+            `${this.obra.data.titulo.length >= 1 ? this.obra.data.titulo[0].text : ''}`, 
+            this.obra.data.descripcion.length >= 1 ? this.obra.data.descripcion[0].text : '',
+            this.obra.data.imagenes.length >= 1 ? this.obra.data.imagenes[0].imagen.url : '',
             this.$route.fullPath
         )
     },
@@ -63,7 +64,7 @@ export default {
                 return im
             })
 
-            
+            console.log(obra)
     
             return obra;
         }
@@ -81,6 +82,7 @@ export default {
         margin-top: 5px;
         color: gray;
         margin-bottom: 10px;
+        text-transform: uppercase;
     }
 
     .description{

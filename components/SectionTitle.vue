@@ -21,5 +21,10 @@
         text-transform: uppercase;
         letter-spacing: 2px;
     }
+    @media (max-width: 600px){
+        h2{
+            text-align: center;
+        }
+    }
 </style>
 

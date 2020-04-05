@@ -77,6 +77,7 @@ export default {
         margin-top: 5px;
         color: gray;
         margin-bottom: 10px;
+        text-transform: uppercase;
     }
 
     .description{
