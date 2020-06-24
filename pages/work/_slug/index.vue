@@ -1,8 +1,9 @@
 <template>
     <div class='page-container'>
-        <router-link :key="index" v-for="(item, index) in obra" :to="{ path: item.link }">
+        <router-link style="color: gray; text-decoration: none;" :key="index" v-for="(item, index) in obra" :to="{ path: item.link }">
             <div class='pic'>
-            <ImageComponent v-bind:source="{url: item.image, alt: item.title}" />
+            <ImageComponent v-bind:source="{url: item.image, alt: item.title}" v-bind:images="item.images" />
+            <div style="letter-spacing: 0.5px; color: gray; text-decoration: none; margin-top: 10px">{{item.title}}</div>
             </div>
         </router-link>
         
@@ -14,7 +15,7 @@
 <script>
 import config from '../../../config';
 import { SectionTitle, Parraph, ImageComponent } from '../../../components'
-import { mapState } from 'vuex'
+import { mapState } from 'vuex' 
 import { widhtHead } from '../../../utils/head'
 
 

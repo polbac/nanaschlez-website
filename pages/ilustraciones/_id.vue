@@ -10,7 +10,6 @@
         </div>
 
         <div v-for="image in obra.data.series" class='pic'>
-        
             
                 <ImageComponent  v-bind:source="image.imagen" />
                 <div class='foot-title' v-if="image.titulo.length >= 1">{{image.titulo[0].text}}</div>
