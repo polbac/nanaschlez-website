@@ -13,5 +13,10 @@ export default {
   },
   plugins: [
     { src: '~/plugins/masonry', ssr: false }
-   ]
+   ],
+   buildModules: [
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-172465534-1 '
+    }]
+  ]
 }

@@ -1,8 +1,8 @@
 <template>
-    <div class='page-container'>
+    <div class='page-container'  v-bind:class="{ 'cols-2': is2Cols() }">
         <router-link style="color: gray; text-decoration: none;" :key="index" v-for="(item, index) in obra" :to="{ path: item.link }">
             <div class='pic'>
-            <ImageComponent v-bind:source="{url: item.image, alt: item.title}" v-bind:images="item.images" />
+                <ImageComponent v-bind:source="{url: item.image, alt: item.title}" v-bind:images="item.images" />
             <div style="letter-spacing: 0.5px; color: gray; text-decoration: none; margin-top: 10px">{{item.title}}</div>
             </div>
         </router-link>
@@ -22,17 +22,11 @@ import { widhtHead } from '../../../utils/head'
 export default {
     async fetch({ store, route }) {
         const { params: { slug } } = route
-        if (slug === 'commitment') {
-            await store.dispatch({ type: 'fetchCommitment' })
-            return
+        const fetch = {
+            'art': 'fetchObras',
+            'ilustraciones': 'fetchIlustraciones',
         }
-        
-        if (slug === 'books') {
-            await store.dispatch({ type: 'fetchBooks' })
-            return
-        }
-
-        await store.dispatch({ type: 'fetchSelf' })
+        await store.dispatch({ type: fetch[slug] })
         
     },
 
@@ -42,27 +36,28 @@ export default {
     },
 
     computed: mapState({
-        obra: function ({ obra, pedido, books }) {
-            const { params: { slug }} = this.$route
-            
-            if (slug === 'commitment') {
-                return pedido;
-            }
+        obra: function ({ items }) {
+            const { params: { slug }, query} = this.$route
 
-            if (slug === 'books') {
-                return books;
-            }
-        
-            return obra.filter(item => {
-                return item.type === slug
-            })
+            let it = items.filter(({tags}) => query.type ? 
+                tags.indexOf(query.type) !== -1 : true)
+
+            return it
         }
-    })
+    }),
+
+    methods: {
+        is2Cols: function() {
+            if (process.browser) {
+                return document.location.search === ''
+            }
+        }
+    }
 }
 </script>
 
 <style>
-
+   
     .foot-title{
         margin-top: 20px;
         font-size:18px;

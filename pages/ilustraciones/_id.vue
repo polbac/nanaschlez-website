@@ -15,12 +15,6 @@
                 <div class='foot-title' v-if="image.titulo.length >= 1">{{image.titulo[0].text}}</div>
                 <div class='foot-desc' v-if="image.descripcion.length >= 1">{{image.descripcion[0].text}}</div>
                 <div class='foot-tec' v-if="image.tecnica.length >= 1">{{image.tecnica[0].text}}</div>
-
-                <!-- <div class='sell' v-if="obra.data.se_vende=='Si'">
-                    <div clas="tit"><b>¿LO QUERÉS EN POSTER?</b></div>
-                    Sale $ {{obra.data.precio}}
-                    <button class='buy-poster'>COMPRAR</button>
-                </div> -->
         </div>
 
         
@@ -74,9 +68,6 @@ export default {
 
                 return im
             })
-
-            console.log('obra', obra)
-    
             return obra;
         }
     }),

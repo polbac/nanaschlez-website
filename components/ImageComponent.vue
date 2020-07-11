@@ -1,6 +1,7 @@
 <template>
     <div>
-        <img ref="image" class="imageComp" v-bind:src='source.url' v-bind:alt='source.alt' />
+        <div v-if="images" ref="image" class="imageCompBackground" v-bind:style="{backgroundImage: 'url(' + source.url +')'}"  />
+        <img v-else ref="image" class="imageComp" v-bind:src='source.url' v-bind:alt='source.alt' />
     </div>
 </template>
 
@@ -54,7 +55,7 @@ export default {
                     self.currentImage = 0
                 }
 
-                self.$refs.image.src = self.images[self.currentImage].imagen.url
+                self.$refs.image.style.backgroundImage = `url(${self.images[self.currentImage].imagen.url})`
                 
             }, 2000 + (Math.random() * 1000))
         }
@@ -65,9 +66,18 @@ export default {
 
 <style>
 
+    .imageCompBackground{
+        height: 400px;
+        background-size: cover;
+    }
+
     .imageComp{
         width: 100%;
         
+    }
+
+    .pic:hover .imageCompBackground,.pic:hover .imageComp:hover{
+        box-shadow: rgb(216, 215, 215) 10px 10px 10px;
     }
 </style>
 

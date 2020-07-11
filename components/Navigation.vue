@@ -19,8 +19,22 @@
             <span class='other-items' v-bind:style="{display: show ? 'block' : 'none' }">
                 <router-link v-bind:class='checkActive("work/art")' v-on:click.native="hideNavigation()" :to="{ path: '/work/art' }">OBRA</router-link>
                 <router-link v-bind:class='checkActive("work/ilustraciones")' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones' }">ILUSTRACIONES</router-link>
-                <router-link v-bind:class='checkActive("work/commitment")' v-on:click.native="hideNavigation()" :to="{ path: '/work/commitment' }">A PEDIDO</router-link>
-                <router-link v-bind:class='checkActive("work/books")' v-on:click.native="hideNavigation()" :to="{ path: '/work/books' }">LIBROS</router-link>
+                <div class="ilustraciones-submenu" v-bind:style="{display: shouldShowSubmenuIllustration() ? 'block' : 'none' }">
+                    <router-link  v-bind:class='checkSubActive(["libros", "infantil", "cubiertas"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=libros' }">LIBROS</router-link>
+                    <div class="submenu-submenu"  v-bind:style="{display: showSubSubmenu(['libros','infantil', 'cubiertas']) ? 'block' : 'none' }">
+                        <router-link v-bind:class='checkSubActive(["infantil"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=infantil' }">INFANTIL</router-link>
+                        <router-link v-bind:class='checkSubActive(["cubiertas"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=cubiertas' }">CUBIERTAS</router-link>
+                    </div>
+                    <router-link v-bind:class='checkSubActive(["discos"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=discos' }">DISCOS</router-link>
+                    <router-link v-bind:class='checkSubActive(["proyectos"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=proyectos' }">PROYECTOS</router-link>
+                    <router-link v-bind:class='checkSubActive(["cine"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=cine' }">CINE</router-link>
+                    <router-link v-bind:class='checkSubActive(["publicidad", "branding", "acciones"])'  v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=publicidad' }">PUBLICIDAD</router-link>
+                    <div class="submenu-submenu" v-bind:style="{display: showSubSubmenu(['publicidad', 'branding', 'acciones']) ? 'block' : 'none' }">
+                        <router-link  v-bind:class='checkSubActive(["branding"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=branding' }">BRANDING</router-link>
+                        <router-link v-bind:class='checkSubActive(["acciones"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=acciones' }">ACCIONES</router-link>
+                    </div>
+                    <router-link  v-bind:class='checkSubActive(["retratos"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=retratos' }">RETRATOS</router-link>
+                </div>
                 <router-link v-bind:class='checkActive("shop")' v-on:click.native="hideNavigation()" :to="{ path: '/shop' }">SHOP</router-link>
                 <router-link v-bind:class='checkActive("bio")' v-on:click.native="hideNavigation()" :to="{ path: '/bio' }">BIO</router-link>
             </span>
@@ -105,13 +119,33 @@
             },
 
             hideNavigation: function() {
-                console.log('hideNavigation')
                 this.show = false;
             },
 
             checkActive: function(r) {
                 if (process.browser) {
                     return document.location.pathname.indexOf(r) !== -1 ? 'active' : ''
+                }
+            },
+
+            showSubSubmenu: function(words) {
+                if (process.browser) {
+                    return words.reduce((accumulator, currentValue) => {
+                        return document.location.search.indexOf(currentValue) !== -1 || accumulator
+                    }, false)
+                }
+            },
+
+            shouldShowSubmenuIllustration: function() {
+                if (process.browser) {
+                    return document.location.pathname.indexOf('ilustraciones') !== -1
+                }
+            },
+
+            checkSubActive: function(types) {
+                if (process.browser) {
+                    const type =  document.location.search.split('?type=')[1]
+                    return types.indexOf(type) !== -1 ? 'active' : ''
                 }
             }
         }
@@ -237,6 +271,24 @@
     .contact-social svg{
         width: 30px;
         height: 30px;
+    }
+
+    nav .ilustraciones-submenu a{
+        font-size: 25px;
+        margin-left: 20px;
+    }
+
+    nav .ilustraciones-submenu > a{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    nav .submenu-submenu{
+        display: none;
+    }
+    nav .submenu-submenu a{
+        margin-left: 40px;
+        font-size: 20px;
     }
     .close {
         width: 20px;

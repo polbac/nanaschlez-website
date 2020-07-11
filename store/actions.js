@@ -43,10 +43,19 @@ const actions = {
         commit('setShop', shop)
     },
 
-    
-    
+    async fetchObras({commit}) {
+        let obras
 
-    async fetchObra({commit}) {
+        try {
+            obras = await getObras();
+        } catch(err) {
+            console.log('err', err)
+        }
+
+        commit('setWorkList', obras)
+    },
+
+    async fetchIlustraciones({commit}) {
         let ilustraciones
 
         try {
@@ -55,7 +64,7 @@ const actions = {
             console.log('err', err)
         }
 
-        commit('setIlustracionesList', ilustraciones)
+        commit('setWorkList', ilustraciones)
     },
 
     async fetchBio({commit}) {
