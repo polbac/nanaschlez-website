@@ -76,7 +76,7 @@ export default {
         
     }
 
-    .pic:hover .imageCompBackground,.pic:hover .imageComp:hover{
+    a[href] .pic:hover .imageCompBackground,a[href] .pic:hover .imageComp:hover{
         box-shadow: rgb(216, 215, 215) 10px 10px 10px;
     }
 </style>
