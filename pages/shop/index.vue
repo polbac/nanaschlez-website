@@ -5,7 +5,7 @@
         Si te gustaría adquirir alguna de estas láminas o algún retrato personalizado enviá un email a nanaschlez@gmail.com así arreglamos forma de pago y envío.
     </p>
     <div v-masonry transition-duration="0.3s" item-selector=".item-shop" class="masonry-container">
-        <div v-masonry-tile class="item-shop" :key="index" v-for="(item, index) in shop.results[0].data.items.reverse()">
+        <div v-masonry-tile class="item-shop" :key="index" v-for="(item, index) in shop.results[0].data.items">
 
 
             <img v-bind:src="item.image.url" width="100%"/>
