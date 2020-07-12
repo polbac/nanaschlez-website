@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <div class='image-container'>
       <img src="../assets/hom1.jpeg" class="image1" alt="" v-bind:style="{display: isActive(1)}">
       <img src="../assets/hom2.png" class="image2" alt=""v-bind:style="{display: isActive(2)}">
@@ -56,6 +56,8 @@ export default {
 </script>
 
 <style>
+
+
   .image-container{
     position: fixed;
     width: 100%;

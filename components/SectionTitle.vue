@@ -25,6 +25,9 @@
         right: 20px;
         transform: translatey(0px);
 	    animation: float 6s ease-in-out infinite;
+        max-width: 240px;
+        text-align: right;
+        z-index: 99;
     }
 
     @keyframes float {
@@ -45,6 +48,7 @@
             text-align: center;
             position: static;
             animation: none;
+            max-width: auto;
         }
     }
 </style>

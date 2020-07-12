@@ -1,15 +1,21 @@
 <template>
     <div class='page-container'>
-        <div class="item-shop" :key="index" v-for="(item, index) in shop.results[0].data.items">
+    <SectionTitle text='Tienda Online' />
+    <p class="body">
+        Si te gustaría adquirir alguna de estas láminas o algún retrato personalizado enviá un email a nanaschlez@gmail.com así arreglamos forma de pago y envío.
+    </p>
+    <div v-masonry transition-duration="0.3s" item-selector=".item-shop" class="masonry-container">
+        <div v-masonry-tile class="item-shop" :key="index" v-for="(item, index) in shop.results[0].data.items.reverse()">
+
+
             <img v-bind:src="item.image.url" width="100%"/>
-            <div v-if="item.link.url">
-            <p v-id="item.title.length > 1">{{item.title[0].text}}</p>
-            <p v-id="item.precio > 1">{{item.precio[0].text}}</p>
-            <p>
-                <a v-bind:href='item.link.url' class='button'>Comprar</a>
-            </p>
-            </div>
-        </div>
+            
+            <p class='title'>{{item.title[0].text}} <span class='precio' v-id="item.precio > 1">{{item.precio[0].text}}</span></p>
+            
+
+        
+    </div>
+      </div>
         
     </div>
     
@@ -32,7 +38,13 @@ export default {
         ImageComponent,
     },
 
-    computed: mapState(['shop'])
+    computed: mapState(['shop']),
+
+    mounted () {
+      if (typeof this.$redrawVueMasonry === 'function') {
+        this.$redrawVueMasonry()
+      }
+    }
 }
 </script>
 
@@ -50,7 +62,39 @@ export default {
 
     .item-shop{
         width: 50%;
-        padding: 10px;
-        margin-bottom: 100px;
+        padding-right: 25px;
+        padding-bottom: 30px;
+        box-sizing: border-box;
     }
+
+    .title{
+        text-transform: uppercase;
+        font-size: 12px;
+        text-align: center;
+    }
+    .precio{
+            text-transform: uppercase;
+    font-size: 12px;
+    background-color: rgb(234, 229, 227);
+    color: #4c4a4a;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    }
+
+    .body{
+        color: black;
+        font-size: 16px;
+        margin-bottom: 50px;
+        
+    }
+
+    @media (max-width: 600px) {
+    .precio{
+      display: block;
+      margin-top: 10px;
+      margin-bototm: 50px;
+    }
+  }
 </style>
