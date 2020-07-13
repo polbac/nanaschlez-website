@@ -11,7 +11,7 @@
 
         <div v-for="image in obra.data.series" >
             <div class='pic'>
-                <ImageComponent  v-bind:source="image.imagen" />
+                <ImageComponent  useZoom="true" v-bind:source="image.imagen" />
                 <div class='foot-title' v-if="image.titulo1[0]">{{image.titulo1[0].text}}</div>
 
             </div>

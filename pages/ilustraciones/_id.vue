@@ -11,7 +11,7 @@
 
         <div v-for="image in obra.data.series" class='pic'>
             
-                <ImageComponent  v-bind:source="image.imagen" />
+                <ImageComponent useZoom="true" v-bind:source="image.imagen" />
                 <div class='foot-title' v-if="image.titulo.length >= 1">{{image.titulo[0].text}}</div>
                 <div class='foot-desc' v-if="image.descripcion.length >= 1">{{image.descripcion[0].text}}</div>
                 <div class='foot-tec' v-if="image.tecnica.length >= 1">{{image.tecnica[0].text}}</div>

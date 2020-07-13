@@ -11,7 +11,7 @@ const mapItem = item => {
         id: item.id,
         tags: item.tags,
         title: item.data.titulo[0].text,
-        image: item.data.series[0].imagen.url,
+        image: item.data.series[0].imagen.url + '&width=600',
         images: imageList(item),
         link: `/ilustraciones/${item.id}`,
         type: 'ilustraciones',
@@ -57,10 +57,33 @@ const mapItem = item => {
   }
 }
 
+const thumbnail = path => {
+  if (path.indexOf('&w=') === -1) {
+    return path + '&width=600'
+  }
+  if (path.indexOf('w=') !== -1) {
+    const width = /w=([^&]*)/
+    const height = /h=([^&]*)/
+    const w = width.exec(path)[1]
+    const h = height.exec(path)[1]
+    return path
+      .replace(/(w=)[^\&]+/, '$1' + Math.floor(w/2))
+      .replace(/(h=)[^\&]+/, '$1' + Math.floor(h/2));
+    
+  }
+  return path
+}
 const imageList = list => {
-  return list.data.series || 
-      list.data.imagenes ||
-      list.data.imagenes1
+  const l = (list.data.series || 
+    list.data.imagenes ||
+    list.data.imagenes1).map(im => ({
+      ...im,
+      imagen: {
+        ...im.imagen,
+        url: thumbnail(im.imagen.url)
+      }
+    }))
+  return l
 }
 
 const mutations = {

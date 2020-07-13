@@ -412,6 +412,9 @@
             width: 80%;
             margin-top: 0;
         }
+        nav .ilustraciones-submenu a{
+        font-size: 20px !important;
+        }
         nav .items
         {
             flex-direction: row;
@@ -431,6 +434,8 @@
          .close {
              right: 10px;
          }
+
+         
     }
     
     .animation-menu{
@@ -466,6 +471,17 @@
         nav.desktop{
             left: 15px;
         }
+        nav .ilustraciones-submenu a {margin-left:0;}
+        nav.desktop{
+             left: 0;
+    background: white;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    padding-top: 14px;
+    padding-bottom: 10px;
+    box-shadow: 0px -2px 14px #e0d8d8;
+         }
         nav.desktop a{
             font-size: 30px;
         }

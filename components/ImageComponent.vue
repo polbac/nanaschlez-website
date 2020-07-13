@@ -1,12 +1,24 @@
 <template>
     <div>
+        <div v-if="isZoom" class="zoom">
+            <img v-on:click="isZoom=false" v-bind:src='source.url' width="80%" />
+        </div>
+
+
         <div v-if="images" ref="image" class="imageCompBackground" v-bind:style="{backgroundImage: 'url(' + source.url +')'}"  />
-        <img v-else ref="image" class="imageComp" v-bind:src='source.url' v-bind:alt='source.alt' />
+        <img v-else v-on:click="isZoom=true && useZoom" ref="image" class="imageComp" v-bind:src='source.url' v-bind:alt='source.alt' />
+        
+        
+
     </div>
+    
 </template>
 
 <script>
 export default {
+    data() {
+        return {isZoom: false}
+    },
     name: 'ImageComponent',
     props: {
         source: {
@@ -16,6 +28,11 @@ export default {
         images: {
             type: Array,
             required: false,
+        },
+        useZoom: {
+            type: Boolean,
+            required: false,
+            default: false
         }
     },
     mounted() {
@@ -28,6 +45,12 @@ export default {
         clearInterval(this.interval)
     },
     methods: {
+        zoom: function() {
+            this.isZoom = true;
+        },
+        hideZoom: function() {
+            this.isZoom = false;
+        },
         loadedImages() {
             const self = this
             
@@ -69,11 +92,33 @@ export default {
     .imageCompBackground{
         height: 400px;
         background-size: cover;
+        background-position: center;
     }
 
     .imageComp{
         width: 100%;
-        
+        cursor: pointer;    
+    }
+
+    @media (max-width: 640px) {
+        .zoom{
+            display: none !important;
+        }
+    }
+
+    .zoom{
+        background: rgba(0,0,0,0.8);
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 999999;
+        overflow-y: scroll;
+        cursor: crosshair;;
+    }
+    .zoom img{
+        width: 80%;
     }
 
     a[href] .pic:hover .imageCompBackground,a[href] .pic:hover .imageComp:hover{
