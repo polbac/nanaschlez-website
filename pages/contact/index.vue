@@ -7,7 +7,7 @@
           You can follow me on <a href="https://www.instagram.com/nanaschlez/" target="_blank">instagram</a> or <a href="https://twitter.com/nanaschlez" target="_blank">twitter</a>.
         </p>
         <p>
-          Check my NFT on known <a href="https://foundation.app/@nanaschlez" target="_blank">FND</a> or <a href="https://knownorigin.io/nana-schlez" target="_blank">KnownOrigin</a>.
+          Check my NFT on <a href="https://foundation.app/@nanaschlez" target="_blank">FND</a> or <a href="https://knownorigin.io/nana-schlez" target="_blank">KnownOrigin</a>.
         </p>
         <p>
           Or you can send me an <a href="mailto:nanaschlez@gmail.com">email</a>.
