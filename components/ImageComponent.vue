@@ -17,7 +17,7 @@
 <script>
 export default {
     data() {
-        return {isZoom: false}
+        return {isZoom: false, imageList: []}
     },
     name: 'ImageComponent',
     props: {
@@ -40,6 +40,7 @@ export default {
         this.currentImage = 0
         this.imagesLoaded = 0
         this.loadedImages()
+        console.log(this.images)
     },
     beforeDestroy() {
         clearInterval(this.interval)
@@ -55,11 +56,12 @@ export default {
             const self = this
             
             if (!this.images) return
-            this.images.forEach(im => {
+            this.images.forEach((im, index) => {
                 const img = new Image()
                 img.onload = () => {
                     self.imagesLoaded++
                     self.checkLoaded()
+                    self.imageList[index] = this
                 }
                 img.src = im.imagen.url
             })
@@ -79,6 +81,7 @@ export default {
                 }
 
                 self.$refs.image.style.backgroundImage = `url(${self.images[self.currentImage].imagen.url})`
+                self.$refs.image.style.height = self.imageList[self.currentImage].height
                 
             }, 2000 + (Math.random() * 1000))
         }

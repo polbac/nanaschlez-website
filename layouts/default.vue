@@ -24,61 +24,40 @@ export default {
 </script>
 
 <style>
-
 @font-face {
-    font-family: 'Fivo Sans';
-    src: url('../assets/FivoSans-Black.woff2') format('woff2'),
-        url('../assets/FivoSans-Black.woff') format('woff'),
-        url('../assets/FivoSans-Black.ttf') format('truetype');
-    font-weight: 900;
+    font-family: 'Surt';
+    src: url('../assets/Surt.woff2') format('woff2'),
+        url('../assets/Surt.ttf') format('truetype');
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Fivo Sans';
-    src: url('../assets/FivoSans-Regular.woff2') format('woff2'),
-        url('../assets/FivoSans-Regular.woff') format('woff'),
-        url('../assets/FivoSans-Regular.ttf') format('truetype');
+    font-family: 'RoslindaleVariable';
+    src: url('../assets/RoslindaleVariable.woff2') format('woff2'),
+        url('../assets/RoslindaleVariable.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'Fivo Sans';
-    src: url('../assets/FivoSans-Light.woff2') format('woff2'),
-        url('../assets/FivoSans-Light.woff') format('woff'),
-        url('../assets/FivoSans-Light.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-}
 
 
 
   html,body{
-    font-family: 'Fivo Sans', helvetica, arial, sans-serif;
-    background: #ffff0005;
+    font-family: 'Surt', helvetica, arial, sans-serif;
+    
   }
   .container{
-    max-width: 1024px;
-    width: 95%;
     margin: auto;
     text-align: left;
-    padding-top: 100px;
   }
   @media (max-width: 600px){
-    .container{
-      padding-top: 20px;
-    }
+    
   }
   p {
     font-size: 20px;
   }
 
-  .page-container{
-    max-width: 600px;
-    margin-left: 40%;
-    margin-top: 50px;
-  }
+  
 
   .pic{
         width: 70%;

@@ -3,8 +3,148 @@
   <head>
     {{ HEAD }}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <style>
+      html,body{margin:0; padding: 0;}
+      h1{margin:0;padding:0;}
+      canvas{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        pointer-events: none;
+      }
+      body{opacity: 0;}
+      
+      @media (max-width: 640px){
+        #video-gatito{
+          margin: auto !important;
+          margin-top: 90px;
+          position: static !important;
+          transform: none !important;
+          border: 2px solid blue;
+          top: auto !important;
+          width: 70% !important;
+        }
+        
+      }
+    </style>
   </head>
   <body {{ BODY_ATTRS }}>
+    
+    
     {{ APP }}
+
+  
+    <video id="video-gatito" style="display:none;width: 25vw; position: fixed;margin-top:-100px; top: 50%; left: 50%; transform:translate(-50%, -50%); z-index: 999;border: 15px solid blue" src="/vid.mp4" muted autoplay loop></video>
+<div id="loading-cano" style="display:none;position: fixed;width: 200px;height: 100px;border: 4px solid #00f;top: 50%;left: 50%;z-index: 99999999;background: white;text-align: center;line-height: 100px;transform: translate(-50%, -50%);color: blue;font-family: monospace;">
+LOADING HEAVIE CAÑO 🙀
+</div>
+
+    <script>
+
+    const $gatito = document.getElementById("video-gatito")
+    
+    let nana;
+    let schlez;
+    let SIZE_WIDTH
+    let SIZE_HEIGHT = 50;
+    let GRID_STEPS = 90;
+    let GRID_SIZE_WIDTH;
+    let GRID_SIZE_HEIGHT;
+    let canoGeometry;
+    let vid;
+
+    function preload() {
+      
+      if (windowWidth>600) {
+        document.getElementById("loading-cano").style.display = "block"
+        canoGeometry = loadModel('/cano/cano.obj', true);
+      }
+      
+      document.querySelector("body").style.opacity = 1;
+    }
+
+    function setup() {
+    
+    createCanvas(windowWidth, windowHeight, WEBGL);
+    
+    
+    };
+
+    function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+  }
+  
+  let isFirst=true
+    function draw() {
+      if(isFirst){
+        document.getElementById("loading-cano").style.display = "none"
+        isFirst = false;
+      }
+    clear()
+
+    let locX = mouseX - height / 2;
+    let locY = mouseY - width / 2;
+
+    ambientLight(200, 200, 200);
+    pointLight(0, 0, 255, locX, locY, 100);
+    
+    
+    
+    colorMode(HSB);
+     let time = millis();
+    fill(255,255,255);
+    
+    
+
+
+    if (isInside()) {
+      translate(-window.innerWidth / 2 + 20, 0)
+      rotate(PI / 2)
+      
+      if ($gatito.style.display === "block") {
+        $gatito.style.display = "none"
+      }
+      
+      
+    } else {
+      if ($gatito.style.display === "none") {
+        $gatito.style.display = "block"
+      }
+      
+      translate(-window.innerWidth / 10, 90)
+    }
+    
+    
+    
+    scale(1.6);
+    noStroke();
+    normalMaterial();
+    translate(-10 + (Math.sin(time/10000) * 400),-10 +(Math.cos(time/10000) * 400))
+    rotateZ(time*-0.0001)
+    rotateX(time*-0.001)
+    rotateY(time*-0.001)
+    rotate(time*-0.0001)
+    
+    model(canoGeometry);
+
+
+    
+    //translate(-windowWidth / 4, windowHeight / 3.4, 0)
+    
+    // cone(90, 270);
+  }; 
+
+  function isInside(){
+    return window.location.pathname !== "/"
+  }
+
+    </script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    
+
+   
   </body>
 </html>

@@ -1,72 +1,84 @@
 <template>
-    <div>
-        <h1>
-            <div id='logo' class='animation-menu'>
+    
+    <div v-bind:class="checkIsHome()">
+        
+
+<h1 v-bind:class="checkIsHome()">
+    <router-link :to="{ path: '/' }">
+        NANA SCHLEZ
+    </router-link>
+</h1>
+
+        
+        <nav >
+            
+            
+                <router-link v-bind:class='checkActive("work/art", "work")' v-on:click.native="hideNavigation()" :to="{ path: '/work/art' }">
+                    
+                    <span style="" class="blinker">work.exe</span>
                 
-                <router-link :to="{ path: '/' }">
-                    <div >
-                        <span>NANA</span>SCHLEZ<span>NANA</span>SCHLEZ<span>NANA</span>SCHLEZ<span>NANA</span>SCHLEZ<span>NANA</span>SCHLEZ<span>NANA</span>SCHLEZ<span>NANA</span>SCHLEZ<span>NANA</span>SCHLEZ
-                    </div>
+                    <video autoplay muted loop src="/static.mp4"></video>
                 </router-link>
                 
-            </div>
-        </h1>
+                <router-link v-bind:class='checkActive("bio", "bio")' v-on:click.native="hideNavigation()" :to="{ path: '/bio' }">
+                    <img width="80" src="/bio.png" /><br/>
+                    <span style="    font-size: 20px;
+    font-family: thamoa;
+    color: blue;
+    text-decoration: underline;
+    position: absolute;
+    top: 80px;
+    left: 25px;">BIO</span>
+                </router-link>
 
-        <div class='overlay' v-bind:style="{display: show ? 'block' : 'none' }" />
-
-        <nav class="desktop">
-            <a v-bind:style="{display: !show ? 'block' : 'none' }" class="menu" v-on:click="showNavigation()">MENU</a>
-            <span class='other-items' v-bind:style="{display: show ? 'block' : 'none' }">
-                <router-link v-bind:class='checkActive("work/art")' v-on:click.native="hideNavigation()" :to="{ path: '/work/art' }">OBRA</router-link>
-                <router-link v-bind:class='checkActive("work/ilustraciones")' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones' }">ILUSTRACIONES</router-link>
-                <div class="ilustraciones-submenu" v-bind:style="{display: shouldShowSubmenuIllustration() ? 'block' : 'none' }">
-                    <router-link  v-bind:class='checkSubActive(["libros", "infantil", "cubiertas"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=libros' }">LIBROS</router-link>
-                    <div class="submenu-submenu"  v-bind:style="{display: showSubSubmenu(['libros','infantil', 'cubiertas']) ? 'block' : 'none' }">
-                        <router-link v-bind:class='checkSubActive(["infantil"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=infantil' }">INFANTIL</router-link>
-                        <router-link v-bind:class='checkSubActive(["cubiertas"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=cubiertas' }">CUBIERTAS</router-link>
-                    </div>
-                    <router-link v-bind:class='checkSubActive(["discos"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=discos' }">DISCOS</router-link>
-                    <router-link v-bind:class='checkSubActive(["proyectos"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=proyectos' }">PROYECTOS</router-link>
-                    <router-link v-bind:class='checkSubActive(["cine"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=cine' }">CINE</router-link>
-                    <router-link v-bind:class='checkSubActive(["publicidad", "branding", "acciones"])'  v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=publicidad' }">PUBLICIDAD</router-link>
-                    <div class="submenu-submenu" v-bind:style="{display: showSubSubmenu(['publicidad', 'branding', 'acciones']) ? 'block' : 'none' }">
-                        <router-link  v-bind:class='checkSubActive(["branding"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=branding' }">BRANDING</router-link>
-                        <router-link v-bind:class='checkSubActive(["acciones"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=acciones' }">ACCIONES</router-link>
-                    </div>
-                    <router-link  v-bind:class='checkSubActive(["retratos"])' v-on:click.native="hideNavigation()" :to="{ path: '/work/ilustraciones?type=retratos' }">RETRATOS</router-link>
-                </div>
-                <router-link v-bind:class='checkActive("/shop")' v-on:click.native="hideNavigation()" :to="{ path: '/shop' }">SHOP</router-link>
-                <router-link v-bind:class='checkActive("bio")' v-on:click.native="hideNavigation()" :to="{ path: '/bio' }">BIO</router-link>
-            </span>
+                <router-link v-bind:class='checkActive("contact", "contact")' v-on:click.native="hideNavigation()" :to="{ path: '/contact' }">
+                    <span class="blinker">CONTACT! 0800-NANA</span>
+                </router-link>
+            
         </nav>
 
 
         <div class="social-icons">
       <div class="social-icons-icon">
         <a href="http://www.instagram.com/nanaschlez">
-        <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m75 512h362c41.355469 0 75-33.644531 75-75v-362c0-41.355469-33.644531-75-75-75h-362c-41.355469 0-75 33.644531-75 75v362c0 41.355469 33.644531 75 75 75zm-45-437c0-24.8125 20.1875-45 45-45h362c24.8125 0 45 20.1875 45 45v362c0 24.8125-20.1875 45-45 45h-362c-24.8125 0-45-20.1875-45-45zm0 0"/><path d="m256 391c74.4375 0 135-60.5625 135-135s-60.5625-135-135-135-135 60.5625-135 135 60.5625 135 135 135zm0-240c57.898438 0 105 47.101562 105 105s-47.101562 105-105 105-105-47.101562-105-105 47.101562-105 105-105zm0 0"/><path d="m406 151c24.8125 0 45-20.1875 45-45s-20.1875-45-45-45-45 20.1875-45 45 20.1875 45 45 45zm0-60c8.269531 0 15 6.730469 15 15s-6.730469 15-15 15-15-6.730469-15-15 6.730469-15 15-15zm0 0"/></svg>
+        <svg fill="white" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="30px" height="30px">    <path d="M 9.9980469 3 C 6.1390469 3 3 6.1419531 3 10.001953 L 3 20.001953 C 3 23.860953 6.1419531 27 10.001953 27 L 20.001953 27 C 23.860953 27 27 23.858047 27 19.998047 L 27 9.9980469 C 27 6.1390469 23.858047 3 19.998047 3 L 9.9980469 3 z M 22 7 C 22.552 7 23 7.448 23 8 C 23 8.552 22.552 9 22 9 C 21.448 9 21 8.552 21 8 C 21 7.448 21.448 7 22 7 z M 15 9 C 18.309 9 21 11.691 21 15 C 21 18.309 18.309 21 15 21 C 11.691 21 9 18.309 9 15 C 9 11.691 11.691 9 15 9 z M 15 11 A 4 4 0 0 0 11 15 A 4 4 0 0 0 15 19 A 4 4 0 0 0 19 15 A 4 4 0 0 0 15 11 z"/></svg>
         </a>
 
       </div>
 
       <div class="social-icons-icon">
-          <a href="https://dribbble.com/nanaschlez" target="_blank">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="512" height="512">
-        <path d="M256,0C115.04,0,0,115.05,0,256c0,140.96,115.05,256,256,256c140.96,0,256-115.05,256-256C512,115.04,396.95,0,256,0z   M429.64,111.51c31.96,38.34,51.47,87.39,52.31,140.89c-40.06-9.37-84.55-10-129.86-1.74c-11.79,2.15-23.58,4.88-35.3,8.16  c-3.9-10.61-8.04-21.13-12.44-31.55c-4.49-10.63-9.23-21.08-14.19-31.38C344.15,175.27,402.65,144.57,429.64,111.51z M256,30  c58.82,0,112.45,22.59,152.7,59.54C393,110.95,348.26,142.12,276.48,169c-25.06-46.66-55.11-89.54-89.83-128.1  C208.51,33.83,231.82,30,256,30z M156.95,52.9c35.41,37.93,65.87,80.29,90.96,126.05c-74.68,24.17-150.29,34.03-212.46,27.66  C50.59,138.96,96.14,82.67,156.95,52.9z M30,256c0-6.64,0.31-13.21,0.87-19.7c13.72,1.45,28.03,2.18,42.82,2.18  c58.33,0,123.86-11.22,188.21-32.53c9.82,20.1,18.65,40.78,26.44,61.97c-25.09,9.02-49.51,20.49-72.44,34.14  c-56.22,33.47-97.35,76.53-114.41,118.71C57.52,379.51,30,320.91,30,256z M256,482c-48.29,0-93.09-15.23-129.86-41.14  c11.4-38.52,49.96-80.19,105.11-113.02c19.43-11.58,42.15-22.49,66.88-31.36c17.53,55.1,28.27,113.26,31.68,173.13  C306.67,477.63,281.84,482,256,482z M359.07,457.1c-4.16-58.32-15.02-115.1-32.45-169.64c48.6-13.36,102.58-17.84,153.77-4.56  C471.33,358.91,424.41,423.47,359.07,457.1z"/>
-        </svg>
-    </a>
+        <a href="https://twitter.com/nanaschlez">
+        <svg fill="white" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 64 64" width="64px" height="64px"><path d="M61.932,15.439c-2.099,0.93-4.356,1.55-6.737,1.843c2.421-1.437,4.283-3.729,5.157-6.437	c-2.265,1.328-4.774,2.303-7.444,2.817C50.776,11.402,47.735,10,44.366,10c-6.472,0-11.717,5.2-11.717,11.611	c0,0.907,0.106,1.791,0.306,2.649c-9.736-0.489-18.371-5.117-24.148-12.141c-1.015,1.716-1.586,3.726-1.586,5.847	c0,4.031,2.064,7.579,5.211,9.67c-1.921-0.059-3.729-0.593-5.312-1.45c0,0.035,0,0.087,0,0.136c0,5.633,4.04,10.323,9.395,11.391	c-0.979,0.268-2.013,0.417-3.079,0.417c-0.757,0-1.494-0.086-2.208-0.214c1.491,4.603,5.817,7.968,10.942,8.067	c-4.01,3.109-9.06,4.971-14.552,4.971c-0.949,0-1.876-0.054-2.793-0.165C10.012,54.074,16.173,56,22.786,56	c21.549,0,33.337-17.696,33.337-33.047c0-0.503-0.016-1.004-0.04-1.499C58.384,19.83,60.366,17.78,61.932,15.439"/></svg>
+        </a>
+
       </div>
 
-      <div class="social-icons-icon">
-          <a href="https://www.behance.net/nanaschlez" target="_blank">
-              <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m437 0h-362c-41.355469 0-75 33.644531-75 75v362c0 41.355469 33.644531 75 75 75h362c41.355469 0 75-33.644531 75-75v-362c0-41.355469-33.644531-75-75-75zm45 437c0 24.8125-20.1875 45-45 45h-362c-24.8125 0-45-20.1875-45-45v-362c0-24.8125 20.1875-45 45-45h362c24.8125 0 45 20.1875 45 45zm0 0"/><path d="m241 211c0-33.085938-26.914062-60-60-60h-90v210h90c33.085938 0 60-26.914062 60-60 0-17.90625-7.894531-33.996094-20.378906-45 12.484375-11.003906 20.378906-27.09375 20.378906-45zm-30 90c0 16.542969-13.457031 30-30 30h-60v-60h60c16.542969 0 30 13.457031 30 30zm-90-60v-60h60c16.542969 0 30 13.457031 30 30s-13.457031 30-30 30zm0 0"/><path d="m346 211c-41.355469 0-75 33.644531-75 75s33.644531 75 75 75c26.691406 0 51.582031-14.363281 64.957031-37.488281l-25.96875-15.023438c-8.03125 13.886719-22.972656 22.511719-38.988281 22.511719-19.558594 0-36.238281-12.539062-42.429688-30h117.429688v-15c0-41.355469-33.644531-75-75-75zm-42.429688 60c6.191407-17.460938 22.871094-30 42.429688-30s36.238281 12.539062 42.429688 30zm0 0"/><path d="m286 151h120v30h-120zm0 0"/></svg>
-          </a>
+       <div class="social-icons-icon">
+        <a href="https://knownorigin.io/nana-schlez">
+        <svg width="2085" height="2085" viewBox="0 0 2085 2085" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="2085" height="2085" rx="111" fill="#F4F4F4"/>
+<circle cx="1294.81" cy="1042.5" r="280.048" fill="blue"/>
+<path d="M509.506 1322.55H1069.6L509.506 762.453V1322.55Z" fill="blue"/>
+</svg>
+        </a>
+
       </div>
+
+            <div class="social-icons-icon">
+        <a href="https://foundation.app/@nanaschlez" style="background: white; width: 24px; height:24px;display:block;">
+        <svg fill="none" viewBox="0 0 98 33" xmlns="http://www.w3.org/2000/svg" style="display:block"><path clip-rule="evenodd" d="M64.894 16.456c0 9.088-7.368 16.456-16.457 16.456s-16.455-7.368-16.455-16.456S39.349 0 48.438 0s16.455 7.368 16.455 16.456zM16.902 1.567a.784.784 0 0 1 1.358 0L35.056 30.66a.784.784 0 0 1-.679 1.176H.785a.784.784 0 0 1-.679-1.176zM68.614.98c-.865 0-1.567.702-1.567 1.568v27.818c0 .866.702 1.567 1.567 1.567h27.819c.865 0 1.567-.701 1.567-1.567V2.547c0-.866-.702-1.568-1.567-1.568z" fill="white" fill-rule="evenodd"></path></svg>
+        </a>
+
+      </div>
+
+     
+
+      
 
       <div class="social-icons-icon">
           <a href="mailto:nanaschlez@gmail.com" target="_blank">
               <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 205.996 205.996" style="enable-background:new 0 0 205.996 205.996;" xml:space="preserve">
+	 viewBox="0 0 205.996 205.996" fill="white" style="enable-background:new 0 0 205.996 205.996;" xml:space="preserve">
 <g>
 	<path d="M102.996,61.363c22.958,0,41.635,18.678,41.635,41.635c0,3.313,2.687,6,6,6s6-2.687,6-6
 		c0-29.574-24.061-53.635-53.635-53.635S49.36,73.424,49.36,102.998s24.061,53.635,53.635,53.635
@@ -99,7 +111,9 @@
     import { mapMutations } from 'vuex'
     
     export default {
-
+        mounted(){
+            this.$forceUpdate()
+        },
         watch: {
             '$route': function (id) {
             this.$forceUpdate()
@@ -124,6 +138,12 @@
         ]),
 
         methods: {
+            checkIsHome: function(){
+                if (process.browser) {
+                
+                    return document.location.pathname === '/' ? 'is-home' : (document.location.pathname === '/bio' ? 'is-bio' : '')
+                }
+            },
             showNavigation: function() {
                 this.show = true;    
             },
@@ -132,9 +152,9 @@
                 this.show = false;
             },
 
-            checkActive: function(r) {
+            checkActive: function(r, other) {
                 if (process.browser) {
-                    return document.location.pathname.indexOf(r) !== -1 ? 'active' : ''
+                    return document.location.pathname.indexOf(r) !== -1 ? 'active ' + other : other
                 }
             },
 
@@ -163,6 +183,114 @@
 </script>
 
 <style>
+.video-container{
+    overflow: hidden;
+    width: 120px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+}
+.page-container{
+    position: relative;
+    z-index: 1;
+}
+
+nav .work span{
+    position: relative;
+    z-index: 100;
+    font-family: impact;
+}
+nav .work{
+    position: fixed;
+    top: 60px;
+    right: 150px;
+    z-index: 99;
+    width: 150px;
+    height: 150px;
+    background: url(/work.gif);
+    line-height: 150px;
+    color: white;
+    text-align: center;
+    background-size: cover;
+    overflow: hidden;
+    border: 5px groove blue;
+    
+}
+nav .work video{
+position: absolute;
+    top: 0px;
+    left: 0;
+    width: 260px;
+    height: 100%;
+    opacity: 0.3;
+}
+nav .work span.marquee{
+    color: white;
+    display: block;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background: blue;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+nav .bio img{
+    animation: card 4s infinite;
+}
+@keyframes card{
+    0%{transform: rotateY(0deg);}
+    50%{transform: rotateY(180deg);}
+    100%{transform: rotateY(360deg);}
+}
+nav .bio{
+        position: fixed;
+    bottom: 90px;
+    
+    z-index: 99;
+}
+
+nav .bio{
+    left: 10px;
+    bottom: 30px;
+}
+.is-home nav .bio{
+    left: 180px;
+    bottom: 90px;
+}
+nav .contact span{
+        text-align: center;
+    position: absolute;
+    width: 100%;
+    top: -30px;
+    left: 0;
+    font-size: 11px;
+}
+
+nav .contact{
+     position: fixed;
+    bottom: 10px;
+    right: 18px;
+    z-index: 99;
+    width: 200px;
+    height: 134px;
+    background: url(/beeper.png);
+    line-height: 150px;
+    color: black;
+    text-align: center;
+    background-size: cover;
+}
+
+.is-home nav .contact{
+bottom: 110px;
+    right: 180px;
+}
+
+.blinker{
+    animation: blinker 1s infinite;
+}
+
     @keyframes blinker {
         49% {
             opacity: 1;
@@ -186,16 +314,17 @@
     }
     nav.desktop{
         display: block;
-        position: fixed;
+
         text-align: left;
-        bottom: 20px;
-        left: 20px;
+        bottom: 0;
+        left: 10px;
         font-weight: 900;
         height: auto; 
         width: auto;
         background: transparent;
         top: auto;
-        
+
+
     }
     nav.desktop a:hover{
         font-weight: 100;
@@ -205,43 +334,17 @@
         font-weight: 600;
     }
     nav.desktop a{
-        font-size: 50px;
-        background: rgb(74,85,82);
+        font-size: 30px;
         
-        background: -moz-linear-gradient(0deg, rgba(74,85,82,1) 0%, rgba(219,223,112,1) 25%, rgba(237,153,169,1) 50%, rgba(250,74,25,1) 75%, rgba(74,85,82,1) 100%);
-        background: -webkit-linear-gradient(0deg, rgba(74,85,82,1) 0%, rgba(219,223,112,1) 25%, rgba(237,153,169,1) 50%, rgba(250,74,25,1) 75%, rgba(74,85,82,1) 100%);
-        background: linear-gradient(0deg, rgba(74,85,82,1) 0%, rgba(219,223,112,1) 25%, rgba(237,153,169,1) 50%, rgba(250,74,25,1) 75%, rgba(74,85,82,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4a5552",endColorstr="#4a5552",GradientType=1);
         
-        background-attachment: fixed;
-        -webkit-text-fill-color: transparent;
-        -webkit-background-clip: text;
-        animation-timing-function: linear;
-        background-size: auto 318px;
-        animation-name: menu-gradient;
-        animation-duration: 4s;
-        animation-iteration-count: infinite;
+       
 
-    }
-    @keyframes menu-gradient {
-        0% {background-position: 0px 0px;}
-        100% {background-position: 0px 318px;}
     }
 
 
-    nav {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: white;
-        text-align: center;
-        z-index: 99999;
-    }
+    
     nav.active{
-        display: block;
+        display: none;
     }
     nav .item-big {
         margin-top: 20px;
@@ -254,11 +357,13 @@
     }
 
     nav a {
+    
         text-decoration: none;
-        color: gray;
+        color: black;
         font-size: 19px;
         display: block;
         transition: 0.1s color ease-in;
+        margin-bottom: 10px;
     }
 
     nav a:hover {
@@ -328,31 +433,39 @@
         color: #8588b7;
     }
     #logo {
-        position: fixed;
-        top: 15px;
-        left: -369px;
-        z-index: 999;
         
+        z-index: 999;
         letter-spacing: 1px;
         white-space: nowrap;
+        height: 100%;
+        
+        width: 120px;
+        font-size: 60px;
+    
     }
 
     #logo a{
-        font-weight: 100;
+    
         color: black;
-        
-        
-        
-        
-        font-size: 50px;
+        font-size: 70px;
         text-decoration: none;
+        display: block;
+        
+        position: fixed;
+        top: 4vh;
+        left: 0;
+        z-index: 9999;
+        width: 100%;
+        text-align:center;
+        transform-origin: 0 0;
+        font-family: "Surt";
     }
 
     #logo a span{
-        font-weight: 900;
-        -webkit-text-stroke-width: 2px;
-        -webkit-text-stroke-color: black;       
-        color: transparent;
+
+        
+        margin-left: 10px;
+        
     }
 
     #logo img {
@@ -369,10 +482,11 @@
     }
 
     nav video {
-        position: fixed;
+        position: absolute;
         top: 0;
-        width: 220px;
-        left: 40px;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
 
     .items {
@@ -396,6 +510,8 @@
     width: 30px;
     z-index: 20;
     margin-top: -50px;
+    background: blue;
+    padding: 10px;
     }
 
     .social-icons svg{
@@ -439,6 +555,7 @@
     }
     
     .animation-menu{
+        position: absolute;
         animation-name: marquee;
         animation-duration: 10s;
         animation-iteration-count: infinite;
@@ -447,7 +564,7 @@
     
      @keyframes marquee {
         0% {left: 0;}
-        100% {left: -738px;}
+        100% {left: -700px;}
     }
 
     .workshop{
@@ -474,13 +591,13 @@
         nav .ilustraciones-submenu a {margin-left:0;}
         nav.desktop{
              left: 0;
-    background: white;
+    
     width: 100%;
     bottom: 0;
     text-align: center;
     padding-top: 14px;
     padding-bottom: 10px;
-    box-shadow: 0px -2px 14px #e0d8d8;
+    
          }
         nav.desktop a{
             font-size: 30px;
@@ -499,6 +616,141 @@
     }
 
     nav a.active{
-            filter: blur(2px) !important;
+            display: none;
         }
+
+   h1, h2 {
+  margin: 0;
+  line-height: 1;
+  font-weight: 400;
+}
+
+h1 {
+    position: fixed;
+  text-shadow: -0.8191520405px 0px 0px blue, 0px -0.5735764357px 0px blue, -1.6383040811px -0.5735764357px 0px blue, -0.8191520405px -1.1471528715px 0px #0099e6, -2.4574561216px -1.1471528715px 0px blue, -1.6383040811px -1.7207293072px 0px #0099e6, -3.2766081622px -1.7207293072px 0px blue, -2.4574561216px -2.294305743px 0px #0099e6, -4.0957602027px -2.294305743px 0px blue, -3.2766081622px -2.8678821787px 0px #0099e6, -4.9149122433px -2.8678821787px 0px blue, -4.0957602027px -3.4414586144px 0px #0099e6, -5.7340642838px -3.4414586144px 0px blue, -4.9149122433px -4.0150350502px 0px #0099e6, -6.5532163244px -4.0150350502px 0px blue, -5.7340642838px -4.5886114859px 0px #0099e6, -7.3723683649px -4.5886114859px 0px blue, -6.5532163244px -5.1621879217px 0px #0099e6, -8.1915204055px -5.1621879217px 0px blue, -7.3723683649px -5.7357643574px 0px #0099e6, -9.010672446px -5.7357643574px 0px blue, -8.1915204055px -6.3093407931px 0px #0099e6, -9.8298244866px -6.3093407931px 0px blue, -9.010672446px -6.8829172289px 0px #0099e6, -10.6489765271px -6.8829172289px 0px blue, -9.8298244866px -7.4564936646px 0px #0099e6, -11.4681285676px -7.4564936646px 0px blue, -10.6489765271px -8.0300701004px 0px #0099e6, -12.2872806082px -8.0300701004px 0px blue, -11.4681285676px -8.6036465361px 0px #0099e6, -13.1064326487px -8.6036465361px 0px blue, -12.2872806082px -9.1772229718px 0px #0099e6, -13.9255846893px -9.1772229718px 0px blue, -13.1064326487px -9.7507994076px 0px #0099e6, -14.7447367298px -9.7507994076px 0px blue, -13.9255846893px -10.3243758433px 0px #0099e6, -15.5638887704px -10.3243758433px 0px blue, -14.7447367298px -10.897952279px 0px #0099e6, -16.3830408109px -10.897952279px 0px blue, -15.5638887704px -11.4715287148px 0px #0099e6, -17.2021928515px -11.4715287148px 0px blue, -16.3830408109px -12.0451051505px 0px #0099e6, -18.021344892px -12.0451051505px 0px blue, -17.2021928515px -12.6186815863px 0px #0099e6, -18.8404969326px -12.6186815863px 0px blue, -18.021344892px -13.192258022px 0px #0099e6, -19.6596489731px -13.192258022px 0px blue, -18.8404969326px -13.7658344577px 0px #0099e6, -20.4788010137px -13.7658344577px 0px blue, -19.6596489731px -14.3394108935px 0px #0099e6, -21.2979530542px -14.3394108935px 0px blue, -20.4788010137px -14.9129873292px 0px #0099e6, -22.1171050947px -14.9129873292px 0px blue, -21.2979530542px -15.486563765px 0px #0099e6, -22.9362571353px -15.486563765px 0px blue, -22.1171050947px -16.0601402007px 0px #0099e6, -23.7554091758px -16.0601402007px 0px blue, -22.9362571353px -16.6337166364px 0px #0099e6, -24.5745612164px -16.6337166364px 0px blue, -23.7554091758px -17.2072930722px 0px #0099e6, -25.3937132569px -17.2072930722px 0px blue, -24.5745612164px -17.7808695079px 0px #0099e6, -26.2128652975px -17.7808695079px 0px blue, -25.3937132569px -18.3544459437px 0px #0099e6, -27.032017338px -18.3544459437px 0px blue, -26.2128652975px -18.9280223794px 0px #0099e6, -27.8511693786px -18.9280223794px 0px blue, -27.032017338px -19.5015988151px 0px #0099e6, -28.6703214191px -19.5015988151px 0px blue, -27.8511693786px -20.0751752509px 0px #0099e6, -29.4894734597px -20.0751752509px 0px blue, -28.6703214191px -20.6487516866px 0px #0099e6, -30.3086255002px -20.6487516866px 0px blue, -29.4894734597px -21.2223281224px 0px #0099e6, -31.1277775407px -21.2223281224px 0px blue, -30.3086255002px -21.7959045581px 0px #0099e6, -31.9469295813px -21.7959045581px 0px blue, -31.1277775407px -22.3694809938px 0px #0099e6, -32.7660816218px -22.3694809938px 0px blue, -31.9469295813px -22.9430574296px 0px #0099e6, -33.5852336624px -22.9430574296px 0px blue, -32.7660816218px -23.5166338653px 0px #0099e6, -34.4043857029px -23.5166338653px 0px blue, -33.5852336624px -24.0902103011px 0px #0099e6, -35.2235377435px -24.0902103011px 0px blue, -34.4043857029px -24.6637867368px 0px #0099e6, -36.042689784px -24.6637867368px 0px blue, -35.2235377435px -25.2373631725px 0px #0099e6, -36.8618418246px -25.2373631725px 0px blue, -36.042689784px -25.8109396083px 0px #0099e6;
+  transform: translatex(36.042689784px) translatey(25.2373631725px);
+  z-index: 9999;
+  
+  
+  
+}
+h1.is-home{
+font-size: 7em;
+  
+  top: 10vw;
+  animation: logoAnimation 6s infinite;
+}
+h1 a{
+    color: pink
+}
+h1 {
+    top: 10px;
+    left: 10px;
+    font-size: 30px;
+    animation: none;
+    transform: rotate(-5deg);
+}
+
+@keyframes logoAnimation{
+    0%{
+        text-shadow: -0.8191520405px 0px 0px blue, 0px -0.5735764357px 0px blue, -1.6383040811px -0.5735764357px 0px blue, -0.8191520405px -1.1471528715px 0px #0099e6, -2.4574561216px -1.1471528715px 0px blue, -1.6383040811px -1.7207293072px 0px #0099e6, -3.2766081622px -1.7207293072px 0px blue, -2.4574561216px -2.294305743px 0px #0099e6, -4.0957602027px -2.294305743px 0px blue, -3.2766081622px -2.8678821787px 0px #0099e6, -4.9149122433px -2.8678821787px 0px blue, -4.0957602027px -3.4414586144px 0px #0099e6, -5.7340642838px -3.4414586144px 0px blue, -4.9149122433px -4.0150350502px 0px #0099e6, -6.5532163244px -4.0150350502px 0px blue, -5.7340642838px -4.5886114859px 0px #0099e6, -7.3723683649px -4.5886114859px 0px blue, -6.5532163244px -5.1621879217px 0px #0099e6, -8.1915204055px -5.1621879217px 0px blue, -7.3723683649px -5.7357643574px 0px #0099e6, -9.010672446px -5.7357643574px 0px blue, -8.1915204055px -6.3093407931px 0px #0099e6, -9.8298244866px -6.3093407931px 0px blue, -9.010672446px -6.8829172289px 0px #0099e6, -10.6489765271px -6.8829172289px 0px blue, -9.8298244866px -7.4564936646px 0px #0099e6, -11.4681285676px -7.4564936646px 0px blue, -10.6489765271px -8.0300701004px 0px #0099e6, -12.2872806082px -8.0300701004px 0px blue, -11.4681285676px -8.6036465361px 0px #0099e6, -13.1064326487px -8.6036465361px 0px blue, -12.2872806082px -9.1772229718px 0px #0099e6, -13.9255846893px -9.1772229718px 0px blue, -13.1064326487px -9.7507994076px 0px #0099e6, -14.7447367298px -9.7507994076px 0px blue, -13.9255846893px -10.3243758433px 0px #0099e6, -15.5638887704px -10.3243758433px 0px blue, -14.7447367298px -10.897952279px 0px #0099e6, -16.3830408109px -10.897952279px 0px blue, -15.5638887704px -11.4715287148px 0px #0099e6, -17.2021928515px -11.4715287148px 0px blue, -16.3830408109px -12.0451051505px 0px #0099e6, -18.021344892px -12.0451051505px 0px blue, -17.2021928515px -12.6186815863px 0px #0099e6, -18.8404969326px -12.6186815863px 0px blue, -18.021344892px -13.192258022px 0px #0099e6, -19.6596489731px -13.192258022px 0px blue, -18.8404969326px -13.7658344577px 0px #0099e6, -20.4788010137px -13.7658344577px 0px blue, -19.6596489731px -14.3394108935px 0px #0099e6, -21.2979530542px -14.3394108935px 0px blue, -20.4788010137px -14.9129873292px 0px #0099e6, -22.1171050947px -14.9129873292px 0px blue, -21.2979530542px -15.486563765px 0px #0099e6, -22.9362571353px -15.486563765px 0px blue, -22.1171050947px -16.0601402007px 0px #0099e6, -23.7554091758px -16.0601402007px 0px blue, -22.9362571353px -16.6337166364px 0px #0099e6, -24.5745612164px -16.6337166364px 0px blue, -23.7554091758px -17.2072930722px 0px #0099e6, -25.3937132569px -17.2072930722px 0px blue, -24.5745612164px -17.7808695079px 0px #0099e6, -26.2128652975px -17.7808695079px 0px blue, -25.3937132569px -18.3544459437px 0px #0099e6, -27.032017338px -18.3544459437px 0px blue, -26.2128652975px -18.9280223794px 0px #0099e6, -27.8511693786px -18.9280223794px 0px blue, -27.032017338px -19.5015988151px 0px #0099e6, -28.6703214191px -19.5015988151px 0px blue, -27.8511693786px -20.0751752509px 0px #0099e6, -29.4894734597px -20.0751752509px 0px blue, -28.6703214191px -20.6487516866px 0px #0099e6, -30.3086255002px -20.6487516866px 0px blue, -29.4894734597px -21.2223281224px 0px #0099e6, -31.1277775407px -21.2223281224px 0px blue, -30.3086255002px -21.7959045581px 0px #0099e6, -31.9469295813px -21.7959045581px 0px blue, -31.1277775407px -22.3694809938px 0px #0099e6, -32.7660816218px -22.3694809938px 0px blue, -31.9469295813px -22.9430574296px 0px #0099e6, -33.5852336624px -22.9430574296px 0px blue, -32.7660816218px -23.5166338653px 0px #0099e6, -34.4043857029px -23.5166338653px 0px blue, -33.5852336624px -24.0902103011px 0px #0099e6, -35.2235377435px -24.0902103011px 0px blue, -34.4043857029px -24.6637867368px 0px #0099e6, -36.042689784px -24.6637867368px 0px blue, -35.2235377435px -25.2373631725px 0px #0099e6, -36.8618418246px -25.2373631725px 0px blue, -36.042689784px -25.8109396083px 0px #0099e6;
+        transform: translatex(0) translatey(0) rotate(10deg);
+    }
+    50%{
+        text-shadow: 0.8191520405px 0px 0px blue, 0px 0.5735764357px 0px blue, 1.6383040811px 0.5735764357px 0px blue, 0.8191520405px 1.1471528715px 0px #0099e6, 2.4574561216px 1.1471528715px 0px blue, 1.6383040811px 1.7207293072px 0px #0099e6, 3.2766081622px 1.7207293072px 0px blue, 2.4574561216px 2.294305743px 0px #0099e6, 4.0957602027px 2.294305743px 0px blue, 3.2766081622px 2.8678821787px 0px #0099e6, 4.9149122433px 2.8678821787px 0px blue, 4.0957602027px 3.4414586144px 0px #0099e6, 5.7340642838px 3.4414586144px 0px blue, 4.9149122433px 4.0150350502px 0px #0099e6, 6.5532163244px 4.0150350502px 0px blue, 5.7340642838px 4.5886114859px 0px #0099e6, 7.3723683649px 4.5886114859px 0px blue, 6.5532163244px 5.1621879217px 0px #0099e6, 8.1915204055px 5.1621879217px 0px blue, 7.3723683649px 5.7357643574px 0px #0099e6, 9.010672446px 5.7357643574px 0px blue, 8.1915204055px 6.3093407931px 0px #0099e6, 9.8298244866px 6.3093407931px 0px blue, 9.010672446px 6.8829172289px 0px #0099e6, 10.6489765271px 6.8829172289px 0px blue, 9.8298244866px 7.4564936646px 0px #0099e6, 11.4681285676px 7.4564936646px 0px blue, 10.6489765271px 8.0300701004px 0px #0099e6, 12.2872806082px 8.0300701004px 0px blue, 11.4681285676px 8.6036465361px 0px #0099e6, 13.1064326487px 8.6036465361px 0px blue, 12.2872806082px 9.1772229718px 0px #0099e6, 13.9255846893px 9.1772229718px 0px blue, 13.1064326487px 9.7507994076px 0px #0099e6, 14.7447367298px 9.7507994076px 0px blue, 13.9255846893px 10.3243758433px 0px #0099e6, 15.5638887704px 10.3243758433px 0px blue, 14.7447367298px 10.897952279px 0px #0099e6, 16.3830408109px 10.897952279px 0px blue, 15.5638887704px 11.4715287148px 0px #0099e6, 17.2021928515px 11.4715287148px 0px blue, 16.3830408109px 12.0451051505px 0px #0099e6, 18.021344892px 12.0451051505px 0px blue, 17.2021928515px 12.6186815863px 0px #0099e6, 18.8404969326px 12.6186815863px 0px blue, 18.021344892px 13.192258022px 0px #0099e6, 19.6596489731px 13.192258022px 0px blue, 18.8404969326px 13.7658344577px 0px #0099e6, 20.4788010137px 13.7658344577px 0px blue, 19.6596489731px 14.3394108935px 0px #0099e6, 21.2979530542px 14.3394108935px 0px blue, 20.4788010137px 14.9129873292px 0px #0099e6, 22.1171050947px 14.9129873292px 0px blue, 21.2979530542px 15.486563765px 0px #0099e6, 22.9362571353px 15.486563765px 0px blue, 22.1171050947px 16.0601402007px 0px #0099e6, 23.7554091758px 16.0601402007px 0px blue, 22.9362571353px 16.6337166364px 0px #0099e6, 24.5745612164px 16.6337166364px 0px blue, 23.7554091758px 17.2072930722px 0px #0099e6, 25.3937132569px 17.2072930722px 0px blue, 24.5745612164px 17.7808695079px 0px #0099e6, 26.2128652975px 17.7808695079px 0px blue, 25.3937132569px 18.3544459437px 0px #0099e6, 27.032017338px 18.3544459437px 0px blue, 26.2128652975px 18.9280223794px 0px #0099e6, 27.8511693786px 18.9280223794px 0px blue, 27.032017338px 19.5015988151px 0px #0099e6, 28.6703214191px 19.5015988151px 0px blue, 27.8511693786px 20.0751752509px 0px #0099e6, 29.4894734597px 20.0751752509px 0px blue, 28.6703214191px 20.6487516866px 0px #0099e6, 30.3086255002px 20.6487516866px 0px blue, 29.4894734597px 21.2223281224px 0px #0099e6, 31.1277775407px 21.2223281224px 0px blue, 30.3086255002px 21.7959045581px 0px #0099e6, 31.9469295813px 21.7959045581px 0px blue, 31.1277775407px 22.3694809938px 0px #0099e6, 32.7660816218px 22.3694809938px 0px blue, 31.9469295813px 22.9430574296px 0px #0099e6, 33.5852336624px 22.9430574296px 0px blue, 32.7660816218px 23.5166338653px 0px #0099e6, 34.4043857029px 23.5166338653px 0px blue, 33.5852336624px 24.0902103011px 0px #0099e6, 35.2235377435px 24.0902103011px 0px blue, 34.4043857029px 24.6637867368px 0px #0099e6, 36.042689784px 24.6637867368px 0px blue, 35.2235377435px 25.2373631725px 0px #0099e6, 36.8618418246px 25.2373631725px 0px blue, 36.042689784px 25.8109396083px 0px #0099e6;
+        transform: translatex(36.042689784px) translatey(25.2373631725px) rotate(-10deg);
+    }
+    100%{
+        text-shadow: -0.8191520405px 0px 0px blue, 0px -0.5735764357px 0px blue, -1.6383040811px -0.5735764357px 0px blue, -0.8191520405px -1.1471528715px 0px #0099e6, -2.4574561216px -1.1471528715px 0px blue, -1.6383040811px -1.7207293072px 0px #0099e6, -3.2766081622px -1.7207293072px 0px blue, -2.4574561216px -2.294305743px 0px #0099e6, -4.0957602027px -2.294305743px 0px blue, -3.2766081622px -2.8678821787px 0px #0099e6, -4.9149122433px -2.8678821787px 0px blue, -4.0957602027px -3.4414586144px 0px #0099e6, -5.7340642838px -3.4414586144px 0px blue, -4.9149122433px -4.0150350502px 0px #0099e6, -6.5532163244px -4.0150350502px 0px blue, -5.7340642838px -4.5886114859px 0px #0099e6, -7.3723683649px -4.5886114859px 0px blue, -6.5532163244px -5.1621879217px 0px #0099e6, -8.1915204055px -5.1621879217px 0px blue, -7.3723683649px -5.7357643574px 0px #0099e6, -9.010672446px -5.7357643574px 0px blue, -8.1915204055px -6.3093407931px 0px #0099e6, -9.8298244866px -6.3093407931px 0px blue, -9.010672446px -6.8829172289px 0px #0099e6, -10.6489765271px -6.8829172289px 0px blue, -9.8298244866px -7.4564936646px 0px #0099e6, -11.4681285676px -7.4564936646px 0px blue, -10.6489765271px -8.0300701004px 0px #0099e6, -12.2872806082px -8.0300701004px 0px blue, -11.4681285676px -8.6036465361px 0px #0099e6, -13.1064326487px -8.6036465361px 0px blue, -12.2872806082px -9.1772229718px 0px #0099e6, -13.9255846893px -9.1772229718px 0px blue, -13.1064326487px -9.7507994076px 0px #0099e6, -14.7447367298px -9.7507994076px 0px blue, -13.9255846893px -10.3243758433px 0px #0099e6, -15.5638887704px -10.3243758433px 0px blue, -14.7447367298px -10.897952279px 0px #0099e6, -16.3830408109px -10.897952279px 0px blue, -15.5638887704px -11.4715287148px 0px #0099e6, -17.2021928515px -11.4715287148px 0px blue, -16.3830408109px -12.0451051505px 0px #0099e6, -18.021344892px -12.0451051505px 0px blue, -17.2021928515px -12.6186815863px 0px #0099e6, -18.8404969326px -12.6186815863px 0px blue, -18.021344892px -13.192258022px 0px #0099e6, -19.6596489731px -13.192258022px 0px blue, -18.8404969326px -13.7658344577px 0px #0099e6, -20.4788010137px -13.7658344577px 0px blue, -19.6596489731px -14.3394108935px 0px #0099e6, -21.2979530542px -14.3394108935px 0px blue, -20.4788010137px -14.9129873292px 0px #0099e6, -22.1171050947px -14.9129873292px 0px blue, -21.2979530542px -15.486563765px 0px #0099e6, -22.9362571353px -15.486563765px 0px blue, -22.1171050947px -16.0601402007px 0px #0099e6, -23.7554091758px -16.0601402007px 0px blue, -22.9362571353px -16.6337166364px 0px #0099e6, -24.5745612164px -16.6337166364px 0px blue, -23.7554091758px -17.2072930722px 0px #0099e6, -25.3937132569px -17.2072930722px 0px blue, -24.5745612164px -17.7808695079px 0px #0099e6, -26.2128652975px -17.7808695079px 0px blue, -25.3937132569px -18.3544459437px 0px #0099e6, -27.032017338px -18.3544459437px 0px blue, -26.2128652975px -18.9280223794px 0px #0099e6, -27.8511693786px -18.9280223794px 0px blue, -27.032017338px -19.5015988151px 0px #0099e6, -28.6703214191px -19.5015988151px 0px blue, -27.8511693786px -20.0751752509px 0px #0099e6, -29.4894734597px -20.0751752509px 0px blue, -28.6703214191px -20.6487516866px 0px #0099e6, -30.3086255002px -20.6487516866px 0px blue, -29.4894734597px -21.2223281224px 0px #0099e6, -31.1277775407px -21.2223281224px 0px blue, -30.3086255002px -21.7959045581px 0px #0099e6, -31.9469295813px -21.7959045581px 0px blue, -31.1277775407px -22.3694809938px 0px #0099e6, -32.7660816218px -22.3694809938px 0px blue, -31.9469295813px -22.9430574296px 0px #0099e6, -33.5852336624px -22.9430574296px 0px blue, -32.7660816218px -23.5166338653px 0px #0099e6, -34.4043857029px -23.5166338653px 0px blue, -33.5852336624px -24.0902103011px 0px #0099e6, -35.2235377435px -24.0902103011px 0px blue, -34.4043857029px -24.6637867368px 0px #0099e6, -36.042689784px -24.6637867368px 0px blue, -35.2235377435px -25.2373631725px 0px #0099e6, -36.8618418246px -25.2373631725px 0px blue, -36.042689784px -25.8109396083px 0px #0099e6;
+        transform: translatex(0) translatey(0) rotate(10deg);
+    }
+}
+
+h1:hover a{
+    text-shadow: 0;
+    color: white;
+}
+
+h2 {
+  color: #dada0b;
+  font-size: 2.5em;
+  text-shadow: -0.8191520405px 0px 0px #790606, 0px -0.5735764357px 0px #da0b0b, -1.6383040811px -0.5735764357px 0px #790606, -0.8191520405px -1.1471528715px 0px #da0b0b, -2.4574561216px -1.1471528715px 0px #790606, -1.6383040811px -1.7207293072px 0px #da0b0b, -3.2766081622px -1.7207293072px 0px #790606, -2.4574561216px -2.294305743px 0px #da0b0b, -4.0957602027px -2.294305743px 0px #790606, -3.2766081622px -2.8678821787px 0px #da0b0b, -4.9149122433px -2.8678821787px 0px #790606, -4.0957602027px -3.4414586144px 0px #da0b0b, -5.7340642838px -3.4414586144px 0px #790606, -4.9149122433px -4.0150350502px 0px #da0b0b, -6.5532163244px -4.0150350502px 0px #790606, -5.7340642838px -4.5886114859px 0px #da0b0b, -7.3723683649px -4.5886114859px 0px #790606, -6.5532163244px -5.1621879217px 0px #da0b0b, -8.1915204055px -5.1621879217px 0px #790606, -7.3723683649px -5.7357643574px 0px #da0b0b, -9.010672446px -5.7357643574px 0px #790606, -8.1915204055px -6.3093407931px 0px #da0b0b, -9.8298244866px -6.3093407931px 0px #790606, -9.010672446px -6.8829172289px 0px #da0b0b, -10.6489765271px -6.8829172289px 0px #790606, -9.8298244866px -7.4564936646px 0px #da0b0b, -11.4681285676px -7.4564936646px 0px #790606, -10.6489765271px -8.0300701004px 0px #da0b0b, -12.2872806082px -8.0300701004px 0px #790606, -11.4681285676px -8.6036465361px 0px #da0b0b, -13.1064326487px -8.6036465361px 0px #790606, -12.2872806082px -9.1772229718px 0px #da0b0b, -13.9255846893px -9.1772229718px 0px #790606, -13.1064326487px -9.7507994076px 0px #da0b0b, -14.7447367298px -9.7507994076px 0px #790606, -13.9255846893px -10.3243758433px 0px #da0b0b, -15.5638887704px -10.3243758433px 0px #790606, -14.7447367298px -10.897952279px 0px #da0b0b, -16.3830408109px -10.897952279px 0px #790606, -15.5638887704px -11.4715287148px 0px #da0b0b, -17.2021928515px -11.4715287148px 0px #790606, -16.3830408109px -12.0451051505px 0px #da0b0b, -18.021344892px -12.0451051505px 0px #790606, -17.2021928515px -12.6186815863px 0px #da0b0b, -18.8404969326px -12.6186815863px 0px #790606, -18.021344892px -13.192258022px 0px #da0b0b, -19.6596489731px -13.192258022px 0px #790606, -18.8404969326px -13.7658344577px 0px #da0b0b, -20.4788010137px -13.7658344577px 0px #790606, -19.6596489731px -14.3394108935px 0px #da0b0b, -21.2979530542px -14.3394108935px 0px #790606, -20.4788010137px -14.9129873292px 0px #da0b0b, -22.1171050947px -14.9129873292px 0px #790606, -21.2979530542px -15.486563765px 0px #da0b0b, -22.9362571353px -15.486563765px 0px #790606, -22.1171050947px -16.0601402007px 0px #da0b0b, -23.7554091758px -16.0601402007px 0px #790606, -22.9362571353px -16.6337166364px 0px #da0b0b, -24.5745612164px -16.6337166364px 0px #790606, -23.7554091758px -17.2072930722px 0px #da0b0b, -25.3937132569px -17.2072930722px 0px #790606, -24.5745612164px -17.7808695079px 0px #da0b0b, -26.2128652975px -17.7808695079px 0px #790606, -25.3937132569px -18.3544459437px 0px #da0b0b, -27.032017338px -18.3544459437px 0px #790606, -26.2128652975px -18.9280223794px 0px #da0b0b, -27.8511693786px -18.9280223794px 0px #790606, -27.032017338px -19.5015988151px 0px #da0b0b, -28.6703214191px -19.5015988151px 0px #790606, -27.8511693786px -20.0751752509px 0px #da0b0b;
+  transform: translatex(36.042689784px) translatey(25.2373631725px);
+}
+
+h2:first-of-type {
+  position: relative;
+  z-index: 2;
+} 
+
+@media (max-width: 700px){
+    h1{
+        top: 70px;
+        left: 20px;
+        font-size: 30px;
+        -webkit-animation: none;
+        animation: none;
+        transform: rotate(-5deg);
+        width: 100%;
+        text-align: center;
+    }
+    h1.is-home{
+        transform: scale(0.9);
+        position: static;
+        left: 0;
+        top: 60px;
+        right: auto;
+    }
+    #video-gatito{
+        width: 45vw;
+        position: fixed;
+        margin-top: -100px;
+    }
+
+    nav .work{
+        right: 0;
+        bottom: 0;
+        transform: scale(0.65);
+        top: auto;
+        left: auto;
+        font-size: 2rem;
+    }
+
+    nav .bio {
+        left: 10px;
+        bottom: 50px;
+    }
+
+    .is-bio a.work{
+        left: 0px;
+        right: auto;
+    }
+
+    .is-home {
+        text-align: center;
+    }
+    .is-home a.bio *,
+    .is-home a.work,
+    .is-home a.bio,
+    .is-home a.contact{
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        bottom: auto !important;
+        right: auto !important;
+        margin: auto !important;
+        margin-bottom: 50px !important;
+        text-align: center;
+    }
+
+   .is-home a.bio span {
+        position: relative !important;
+    top: -30px !important;
+    }
+
+    .is-home a.work {
+        transform: scale(1);
+    }
+
+}
 </style>

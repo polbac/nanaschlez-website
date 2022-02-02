@@ -1,6 +1,6 @@
 <template>
     <div class="page-container">
-        <div v-bind:style="{ color: obra.data.color }">
+        <div >
 
         <SectionTitle  v-if="obra.data.titulo.length >= 1" v-bind:text='obra.data.titulo[0].text' />
         
@@ -75,19 +75,33 @@ export default {
 
 <style>
 
+.page-container{
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
 
     .foot-title{
         margin-top: 20px;
         font-size:18px;
         margin-top: 5px;
-        color: gray;
         margin-bottom: 10px;
         text-transform: uppercase;
+        font-size: 20px;
+        font-family: "RoslindaleVariable";
+        color: black;
     }
 
-    .description{
-        margin-bottom: 50px;
-        line-height: 30px;
+    .foot-desc{
+color: black;
+        font-size: 12px;
         
+    }
+
+
+    .foot-tec{
+        color: black;
+        text-transform: uppercase;
+        font-size: 12px;
     }
 </style>

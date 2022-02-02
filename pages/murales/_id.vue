@@ -80,6 +80,11 @@ export default {
         text-transform: uppercase;
     }
 
+    .foot-tec{
+        font-family: "RoslindaleVariable";
+        text-transform: uppercase;
+    }
+
     .description{
         margin-bottom: 50px;
         line-height: 30px;

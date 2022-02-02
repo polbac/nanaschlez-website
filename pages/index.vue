@@ -1,14 +1,46 @@
 <template>
-  <div class="home">
-    <div class='image-container'>
-      <img src="../assets/hom1.jpeg" class="image1" alt="" v-bind:style="{display: isActive(1)}">
-      <img src="../assets/hom2.png" class="image2" alt=""v-bind:style="{display: isActive(2)}">
-      <img src="../assets/home3.jpg" class="image3" alt=""v-bind:style="{display: isActive(3)}">
-      
-    </div>
-    <router-link :to="{ path: '/workshop' }" class='workshop-banner'>TALLER<br/>CREATIVO</router-link>
-  </div>
+ 
+<div class="home-page">
 
+<iframe style=" width: 200px;height: 114px;top: 30px;position: absolute;left: 60px;" src="https://www.youtube-nocookie.com/embed/SDF-f3BAVjE?controls=0&autoplay=1" title="YouTube video player" autoplay="autoplay" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/naked-10_7_dtp.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<marquee>ART CAN SAVE US / PLEASE BUY ART</marquee>
+<div id="mc_embed_signup">
+<form action="https://gmail.us14.list-manage.com/subscribe/post?u=4322944eee68d61510a907922&amp;id=d254770c0e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<h3>mailing list</h3>
+  <p>and stay tunned</p>
+
+<div class="mc-field-group">
+	<label for="mce-EMAIL">
+</label>
+	<input placeholder="Email Address" type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+</div>
+	<div id="mce-responses" class="clear foot">
+		<div class="response" id="mce-error-response" style="display:none"></div>
+		<div class="response" id="mce-success-response" style="display:none"></div>
+	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_4322944eee68d61510a907922_d254770c0e" tabindex="-1" value=""></div>
+        <div class="optionalParent">
+            <div class="clear foot">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+                
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+
+<div class="created">CREATE WITH 💙 BY <a href="https://www.instagram.com/polbac_______/" target="_blank">POLBAC</a></div>
+<!--End mc_embed_signup-->
+</div>
   
 </template>
 <script>
@@ -168,5 +200,60 @@ export default {
 	}
 }
 
-  
+
+.home-page {
+	
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+#mc_embed_signup{background: url(/glow.gif); clear:left; font:14px Helvetica,Arial,sans-serif; }
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+#mc_embed_signup input[type="submit"]{background: blue;color: white;margin-top:20px;}
+#mc_embed_signup h3{font-size: 20px;margin: 0;}
+#mc_embed_signup p{margin: 0;font-size: 12px;margin-bottom: 20px;}
+     #mc_embed_signup{
+       border-radius: 20px;
+       color: white;
+           position: fixed;
+    bottom: 10px;
+    width: 240px;
+    left: 40%;
+    
+    border: 3px inset blue;
+    text-align: center;
+    padding: 10px;
+     }
+.created{position: absolute; bottom: 10px; right: 10px; font-size: 11px;color:blue;}
+.created a{color:blue;}
+marquee{font-size: 2rem;color: blue;position:absolute;top:50%;width:100%;}
+
+@media (max-width: 640px){
+  .home-page {
+   text-align: center; 
+  }
+  .home-page video,
+  .home-page #mc_embed_signup,
+  .home-page iframe{
+    position: static !important;
+    margin: auto;
+    margin-bottom: 15px;
+  }
+  .created{
+          position: static !important;
+          margin-top: 50px;
+          margin-bottom: 50px;
+        }
+}
 </style>
