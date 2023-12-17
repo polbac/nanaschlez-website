@@ -14,11 +14,12 @@
     "vue-masonry": "^0.11.7"
   },
   "devDependencies": {
+    "encoding": "^0.1.13",
     "node-fetch": "^2.5.0",
     "webpack-bundle-analyzer": ">=3.3.2"
   },
   "engines": {
-    "node": "16.x"
+    "node": "18.x"
   },
   "scripts": {
     "dev": "NODE_OPTIONS=--openssl-legacy-provider nuxt",
