@@ -219,6 +219,7 @@ export default {
 .interactive-area {
   line-height: 0;
 }
+
 .interactive-area:hover .work-title {
   opacity: 1;
 }
