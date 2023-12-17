@@ -16,7 +16,7 @@
     </div>
 
     <div class="pici ">
-    <video class="picvideo" :src="require('~/assets/nana2.webm')" width="100%" autoplay muted loop></video>
+    <video class="picvideo" :src="require('~/assets/nana2.mp4')" width="100%" autoplay muted loop></video>
     </div>
     </div>
     

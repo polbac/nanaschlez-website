@@ -1,259 +1,266 @@
 <template>
-<div>
-    <div v-if="isZoom!==false" class="zoom-image" v-on:click="isZoom=false">
-        <img :src="obra[isZoom].img" />
+  <div>
+    <div v-if="isZoom !== false" class="zoom-image" v-on:click="isZoom = false">
+      <img :src="obra[isZoom].img" />
 
-        <div class="detail">
-            <p class="detail-title">{{obra[isZoom].name}}</p>
-            <p class="detail-tech">{{obra[isZoom].tech}}</p>
+      <div class="detail">
+        <p class="detail-title">{{ obra[isZoom].name }}</p>
+        <p class="detail-tech">{{ obra[isZoom].tech }}</p>
+      </div>
+    </div>
+    <div
+      v-bind:class="{ 'page-container': true, 'is-hover': isHover }"
+      id="art-list"
+    >
+      <span
+        :key="index"
+        v-for="(item, index) in obra"
+        v-bind:class="getRandomClass(index)"
+        on
+      >
+        <div class="interactive-area">
+          <img
+            style="cursor: pointer"
+            v-on:click="isZoom = index"
+            @mouseleave="mouseLeave(index)"
+            @mouseover="mouseEnter(index)"
+            :src="item.img"
+            class="l-pic"
+          />
+          <div class="work-title">
+            <div class="glitch" :data-text="item.name">{{ item.name }}</div>
+          </div>
         </div>
+      </span>
     </div>
-    <div v-bind:class="{ 'page-container': true, 'is-hover': isHover}" id="art-list" >
-        <span :key="index" v-for="(item, index) in obra"  v-bind:class="getRandomClass(index)" on>
-                <div class="interactive-area">
-                <img style="cursor: pointer" v-on:click="isZoom=index" @mouseleave="mouseLeave(index)" @mouseover="mouseEnter(index)" :src="item.img" class="l-pic" />
-                <div class="work-title">
-                    <div class="glitch" :data-text="item.name">{{item.name}}</div>
-                </div>
-                </div>
-        </span>
-    </div>
-
-</div>
+  </div>
 </template>
 
 <script>
-import config from '../../../config';
-import { shuffleArray } from '../../../utils';
-import { SectionTitle, Parraph, ImageComponent } from '../../../components'
-import { mapState } from 'vuex' 
-import { widhtHead } from '../../../utils/head'
-
+import config from "../../../config";
+import { shuffleArray } from "../../../utils";
+import { SectionTitle, Parraph, ImageComponent } from "../../../components";
+import { mapState } from "vuex";
+import { widhtHead } from "../../../utils/head";
 
 export default {
+  async fetch({ store, route }) {
+    const {
+      params: { slug },
+    } = route;
+    const fetch = {
+      art: "fetchObras",
+      ilustraciones: "fetchIlustraciones",
+    };
+    await store.dispatch({ type: fetch[slug] });
+  },
 
+  components: {
+    SectionTitle,
+    ImageComponent,
+  },
 
+  data() {
+    return { isZoom: false, imageList: [] };
+  },
 
-    async fetch({ store, route }) {
-        const { params: { slug } } = route
-        const fetch = {
-            'art': 'fetchObras',
-            'ilustraciones': 'fetchIlustraciones',
+  computed: mapState({
+    isZoom: 1,
+    obra: function({ items }) {
+      const {
+        params: { slug },
+        query,
+      } = this.$route;
+
+      let it = items.filter(({ tags }) =>
+        query.type ? tags.indexOf(query.type) !== -1 : true
+      );
+
+      it = it.reduce((acc, current) => {
+        current.images.forEach((img) => {
+          console.log(img);
+          acc.push({
+            img: img.imagen.url,
+            link: current.link,
+            name: img?.titulo1[0]?.text || img?.titulo2[0]?.text,
+            tech: img?.tecnica[0]?.text,
+          });
+        });
+        return acc;
+      }, []);
+      return shuffleArray(it);
+    },
+  }),
+
+  methods: {
+    is2Cols: function() {
+      if (process.browser) {
+        return document.location.search === "";
+      }
+    },
+    getRandomClass(index) {
+      return `col--${Math.ceil(
+        Math.random() * 5
+      )} item-img item-index-${index}`;
+    },
+    getTransform() {
+      return `translate(${-20 + Math.random() * 40}vw,${-20 +
+        Math.random() * 40}vw)`;
+    },
+    mouseEnter(indexItem) {
+      document.querySelectorAll(".interactive-area").forEach((item, index) => {
+        if (indexItem !== index) {
+          item.querySelector("img").style.opacity = 0.1;
+          item.style.background = "white";
         }
-        await store.dispatch({ type: fetch[slug] })
-        
+      });
     },
 
-    components: {
-        SectionTitle,
-        ImageComponent,
+    mouseLeave() {
+      document.querySelector(".page-container").style.background =
+        "transparent";
+      document.querySelectorAll(".interactive-area").forEach((item, index) => {
+        item.querySelector("img").style.opacity = 1;
+      });
     },
 
-    data() {
-        return {isZoom: false, imageList: []}
+    onClick(index) {
+      console.log(index);
     },
-
-    computed: mapState({
-        isZoom: 1,
-        obra: function ({ items }) {
-            const { params: { slug }, query} = this.$route
-
-            let it = items.filter(({tags}) => query.type ? 
-                tags.indexOf(query.type) !== -1 : true)
-            
-            it = it.reduce((acc, current) => {
-                
-                current.images.forEach(img => {
-                    console.log(img)
-                    acc.push({
-                        img: img.imagen.url,
-                        link: current.link,
-                        name: img?.titulo1[0]?.text || img?.titulo2[0]?.text,
-                        tech: img?.tecnica[0]?.text,
-                    })
-                })
-                return acc
-            }, [])
-            return shuffleArray(it)
-        }
-    }),
-
-    
-
-    methods: {
-        is2Cols: function() {
-            if (process.browser) {
-                return document.location.search === ''
-            }
-        },
-        getRandomClass(index){
-            return `col--${Math.ceil(Math.random() * 5)} item-img item-index-${index}`
-        },
-        getTransform(){
-
-            return `translate(${-20 + Math.random()*40}vw,${-20+Math.random()*40}vw)`
-        },
-        mouseEnter(indexItem) {
-            
-            document.querySelectorAll('.interactive-area').forEach((item, index) => {
-                if (indexItem !== index) {
-                    item.querySelector('img').style.opacity = 0.1
-                    item.style.background = "white"
-                }
-            })
-        },
-
-        mouseLeave() {
-            document.querySelector('.page-container').style.background = 'transparent'
-            document.querySelectorAll('.interactive-area').forEach((item, index) => {
-                    item.querySelector('img').style.opacity = 1
-                    
-            })
-        },
-
-        onClick(index) {
-            console.log(index)
-        }
-    }
-}
+  },
+};
 </script>
 
 <style>
-
-
-   
-    .foot-title{
-        margin-top: 20px;
-        font-size:18px;
-        margin-top: 5px;
-        color: gray;
-        margin-bottom: 10px;
-        text-transform: uppercase;
-    }
-
-    .description{
-        margin-bottom: 50px;
-        line-height: 30px;
-        
-    }
-
-    #art-list{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .is-hover #art-list span{
-        opacity: 0.2;
-    }
-
-    #art-list span{
-        display: flex;
-        width: 33.33%;
-        box-sizing: border-box;
-        padding: 2vw;
-        vertical-align: top;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #art-list img{
-        width: 100%;
-        
-        box-sizing: border-box;
-    }
-
-    #art-list .col--1{
-        width: 33%;
-        padding: 5vw;
-    }
-
-    #art-list .col--2{
-        width: 50%;
-        padding: 6vw;
-    }
-
-    #art-list .col--3{
-        width: 25%;
-        padding: 5vw;
-    }
-
-    #art-list .col--4{
-        width: 20%;
-        padding: 3vw;
-    }
-
-    #art-list .col--5{
-        width: 33.33%;
-        padding: 5vw;
-    }
-
-    .work-title{
-        
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: black;
-        text-decoration: none;
-        opacity: 0;
-        font-size: 3vw;
-        display: block;
-        font-weight: bold;
-        text-transform: uppercase;
-        pointer-events: none;
-        transition: all 0.22s;
-        line-height: 3vw;
-        text-align: center;
-        background: blue;
-        color: white;
-    }
-    .interactive-area{
-        line-height: 0;
-    }
-    .interactive-area:hover .work-title{
-        opacity: 1;
-    }
-
-.page-container{
-    
+.foot-title {
+  margin-top: 20px;
+  font-size: 18px;
+  margin-top: 5px;
+  color: gray;
+  margin-bottom: 10px;
+  text-transform: uppercase;
 }
 
-.zoom-image{
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: blue;
-    z-index: 99999;
-    justify-content: center;
-    align-items: center;
-    cursor: crosshair;
+.description {
+  margin-bottom: 50px;
+  line-height: 30px;
 }
 
-.zoom-image img{
-    object-fit: contain;
-    height: 100vh;
+#art-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.zoom-image .detail{
-    position: fixed;
-    bottom:10px;
-    left: 10px;
-    color: white;
-}
-.zoom-image .detail p{
-    margin: 0;
-    padding: 0;
-    text-transform: uppercase;   
+.is-hover #art-list span {
+  opacity: 0.2;
 }
 
-.zoom-image .detail p.detail-tech{
-    font-family: "RoslindaleVariable";
-    
-    font-size: 13px;
+#art-list span {
+  display: flex;
+  width: 33.33%;
+  box-sizing: border-box;
+  padding: 2vw;
+  vertical-align: top;
+  justify-content: center;
+  align-items: center;
+}
+
+#art-list img {
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+#art-list .col--1 {
+  width: 33%;
+  padding: 5vw;
+}
+
+#art-list .col--2 {
+  width: 50%;
+  padding: 6vw;
+}
+
+#art-list .col--3 {
+  width: 25%;
+  padding: 5vw;
+}
+
+#art-list .col--4 {
+  width: 20%;
+  padding: 3vw;
+}
+
+#art-list .col--5 {
+  width: 33.33%;
+  padding: 5vw;
+}
+
+.work-title {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  text-decoration: none;
+  opacity: 0;
+  font-size: 3vw;
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+  pointer-events: none;
+  transition: all 0.22s;
+  line-height: 3vw;
+  text-align: center;
+  background: blue;
+  color: white;
+}
+.interactive-area {
+  line-height: 0;
+}
+.interactive-area:hover .work-title {
+  opacity: 1;
+}
+
+.page-container {
+}
+
+.zoom-image {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  z-index: 99999;
+  justify-content: center;
+  align-items: center;
+  cursor: crosshair;
+}
+
+.zoom-image img {
+  object-fit: contain;
+  height: 100vh;
+}
+
+.zoom-image .detail {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  color: black;
+}
+.zoom-image .detail p {
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.zoom-image .detail p.detail-tech {
+  font-family: "RoslindaleVariable";
+
+  font-size: 13px;
 }
 
 .glitch {
@@ -503,17 +510,17 @@ skew to change the 'thickness' of the glitch.*/
   }
 }
 
-@media (max-width:640px){
+@media (max-width: 640px) {
   #art-list .col--1,
   #art-list .col--2,
   #art-list .col--3,
   #art-list .col--4,
   #art-list .col--5,
-  #art-list .col--6{
+  #art-list .col--6 {
     width: 90%;
   }
 
-  .zoom-image img{
+  .zoom-image img {
     width: 100vw;
   }
 }

@@ -16,7 +16,7 @@
 <form action="https://gmail.us14.list-manage.com/subscribe/post?u=4322944eee68d61510a907922&amp;id=d254770c0e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
 	<h3>mailing list</h3>
-  <p>and stay tunned</p>
+  <p>and stay tuned</p>
 
 <div class="mc-field-group">
 	<label for="mce-EMAIL">
