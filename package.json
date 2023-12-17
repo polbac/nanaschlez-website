@@ -17,9 +17,12 @@
     "node-fetch": "^2.5.0",
     "webpack-bundle-analyzer": ">=3.3.2"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
-    "dev": "nuxt",
-    "build": " NODE_OPTIONS=--openssl-legacy-provider nuxt generate",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider nuxt",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider nuxt generate",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "deploy": "vercel --prod"
