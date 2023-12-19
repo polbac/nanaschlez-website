@@ -1,5 +1,5 @@
 export default {
-  target: 'static',
+  target: 'server',
   loading: '~/components/Loading.vue',
   head: {
     title: 'nana schlez'
