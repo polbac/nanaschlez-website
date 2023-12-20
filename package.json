@@ -7,7 +7,6 @@
     "axios": ">=0.18.1",
     "css-loader": "^5.2.7",
     "nuxt": "^2.6.10",
-    "nuxt-edge": "^2.9.0-26017930.7d08ff1f",
     "postcss": "^8.4.32",
     "postcss-import": "^13.0.0",
     "postcss-loader": "^4.3.0",
