@@ -29,6 +29,7 @@
     "node": "18.x"
   },
   "scripts": {
+    "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "a": "a"
