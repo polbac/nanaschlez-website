@@ -30,6 +30,7 @@
   },
   "scripts": {
     "build": "nuxt build",
-    "start": "nuxt start"
+    "start": "nuxt start",
+    "a": "a"
   }
 }
