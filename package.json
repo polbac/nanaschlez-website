@@ -29,8 +29,6 @@
   "scripts": {
     "dev": "NODE_OPTIONS=--openssl-legacy-provider nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "NODE_OPTIONS=--openssl-legacy-provider nuxt generate",
-    "deploy": "vercel --prod"
+    "start": "nuxt start"
   }
 }
